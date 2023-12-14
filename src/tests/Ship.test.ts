@@ -14,4 +14,15 @@ describe("Ship Class", () => {
         expect(a.receivedHits).toBe(0);
         expect(Object.keys(a)).toHaveLength(1);
     });
+
+    test("'receivedHits' is incremented when calling 'getHit' method", () => {
+        const a = new Ship(3);
+
+        expect(a.receivedHits).toBe(0);
+        a.getHit();
+        expect(a.receivedHits).toBe(1);
+        a.getHit();
+        a.getHit();
+        expect(a.receivedHits).toBe(3);
+    });
 });
