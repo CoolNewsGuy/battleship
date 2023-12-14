@@ -6,4 +6,8 @@ export class Ship {
         this.shipLength = shipLength;
         this.#receivedHits = 0;
     }
+
+    get receivedHits(): number {
+        return this.#receivedHits;
+    }
 }
