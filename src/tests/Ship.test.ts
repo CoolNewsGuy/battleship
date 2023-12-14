@@ -7,4 +7,11 @@ describe("Ship Class", () => {
         expect(a.shipLength).toBe(3);
         expect(Object.keys(a)).toHaveLength(1);
     });
+
+    it("has a getter for 'receivedHits', which is a private prop", () => {
+        const a = new Ship(3);
+
+        expect(a.receivedHits()).toBe(0);
+        expect(Object.keys(a)).toHaveLength(1);
+    });
 });
