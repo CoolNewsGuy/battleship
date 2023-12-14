@@ -10,4 +10,8 @@ export class Ship {
     get receivedHits(): number {
         return this.#receivedHits;
     }
+
+    getHit(): void {
+        this.#receivedHits += 1;
+    }
 }
