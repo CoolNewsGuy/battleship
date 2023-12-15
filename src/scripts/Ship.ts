@@ -14,4 +14,8 @@ export class Ship {
     getHit(): void {
         this.#receivedHits += 1;
     }
+
+    isSunk(): boolean {
+        return this.#receivedHits === this.shipLength;
+    }
 }
