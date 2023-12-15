@@ -25,4 +25,15 @@ describe("Ship Class", () => {
         a.getHit();
         expect(a.receivedHits).toBe(3);
     });
+
+    test("'isSunk' method returns true if 'receivedHits' == 'shipLength'", () => {
+        const a = new Ship(3);
+
+        expect(a.isSunk()).toBeFalsy();
+        a.getHit();
+        a.getHit();
+        expect(a.isSunk()).toBeFalsy();
+        a.getHit();
+        expect(a.isSunk()).toBeTruthy();
+    });
 });
