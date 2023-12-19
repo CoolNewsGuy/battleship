@@ -1,7 +1,7 @@
 import { Spot, type MatrixOf10x10 } from "../types";
 
 export class Gameboard {
-    #grid: MatrixOf10x10<Spot>;
+    readonly #grid: MatrixOf10x10<Spot>;
 
     constructor() {
         this.#grid = new Array<null>(10)
