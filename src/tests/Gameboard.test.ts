@@ -16,4 +16,8 @@ describe("Gameboard Class", () => {
             expect(row).toHaveLength(10);
         }
     });
+
+    describe("placeShip method", () => {
+        
+    });
 });
