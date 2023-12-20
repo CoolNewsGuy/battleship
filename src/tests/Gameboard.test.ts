@@ -18,6 +18,14 @@ describe("Gameboard Class", () => {
     });
 
     describe("placeShip method", () => {
-        
+        it("returns an error if the provided coordinates are out of board", () => {
+            const board = new Gameboard();
+
+            expect(board.placeShip(10, 9)).toBeInstanceOf(WrongCoordsError);
+            expect(board.placeShip(0, 92)).toBeInstanceOf(WrongCoordsError);
+            expect(board.placeShip(5, 9)).not.toBeInstanceOf(WrongCoordsError);
+            expect(board.placeShip(9, 9)).not.toBeInstanceOf(WrongCoordsError);
+            expect(board.placeShip(0, 0)).not.toBeInstanceOf(WrongCoordsError);
+        });
     });
 });
