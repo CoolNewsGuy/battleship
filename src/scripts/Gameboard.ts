@@ -17,6 +17,8 @@ export class Gameboard {
     }
 
     placeShip(row: number, col: number): undefined | WrongCoordsError {
-        
+        if (row < 0 || row > 9 || col < 0 || col > 9) {
+            return new WrongCoordsError(row, col);
+        }
     }
 }
