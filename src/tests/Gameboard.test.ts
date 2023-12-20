@@ -1,3 +1,4 @@
+import { WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 
 describe("Gameboard Class", () => {
