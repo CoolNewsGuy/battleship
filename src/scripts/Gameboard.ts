@@ -1,6 +1,5 @@
 import { WrongCoordsError } from "../errors";
-import { Spot, type MatrixOf10x10 } from "../types";
-import { Ship } from "./Ship";
+import { Spot, type MatrixOf10x10, type PlacingOptions } from "../types";
 
 export class Gameboard {
     readonly #grid: MatrixOf10x10<Spot>;
@@ -17,11 +16,9 @@ export class Gameboard {
         return this.#grid;
     }
 
-    placeShip(
-        ship: Ship,
-        row: number,
-        col: number
-    ): undefined | WrongCoordsError {
+    placeShip(options: PlacingOptions): undefined | WrongCoordsError {
+        const { row, col } = options;
+
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
         }
