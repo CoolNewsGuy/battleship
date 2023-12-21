@@ -1,6 +1,7 @@
 import { WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
+import { PlacingOptions } from "../types";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
@@ -23,22 +24,35 @@ describe("Gameboard Class", () => {
         it("returns an error if the provided coordinates are out of board", () => {
             const board = new Gameboard();
             const ship = new Ship(3);
+            const coordsPairs: Array<[number, number]> = [
+                [10, 9],
+                [0, 92],
+                [5, 9],
+                [9, 9],
+                [0, 0],
+            ];
 
-            expect(board.placeShip(ship, 10, 9)).toBeInstanceOf(
-                WrongCoordsError
-            );
-            expect(board.placeShip(ship, 0, 92)).toBeInstanceOf(
-                WrongCoordsError
-            );
-            expect(board.placeShip(ship, 5, 9)).not.toBeInstanceOf(
-                WrongCoordsError
-            );
-            expect(board.placeShip(ship, 9, 9)).not.toBeInstanceOf(
-                WrongCoordsError
-            );
-            expect(board.placeShip(ship, 0, 0)).not.toBeInstanceOf(
-                WrongCoordsError
-            );
+            for (let i = 0; i < coordsPairs.length; i++) {
+                if (i < 2) {
+                    expect(
+                        board.placeShip({
+                            ship,
+                            row: coordsPairs[i][0],
+                            col: coordsPairs[i][1],
+                        })
+                    ).toBeInstanceOf(WrongCoordsError);
+
+                    continue;
+                }
+
+                expect(
+                    board.placeShip({
+                        ship,
+                        row: coordsPairs[i][0],
+                        col: coordsPairs[i][1],
+                    })
+                ).not.toBeInstanceOf(WrongCoordsError);
+            }
         });
     });
 });
