@@ -1,5 +1,6 @@
 import { WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
+import { Ship } from "../scripts/Ship";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
@@ -21,12 +22,23 @@ describe("Gameboard Class", () => {
     describe("placeShip method", () => {
         it("returns an error if the provided coordinates are out of board", () => {
             const board = new Gameboard();
+            const ship = new Ship(3);
 
-            expect(board.placeShip(10, 9)).toBeInstanceOf(WrongCoordsError);
-            expect(board.placeShip(0, 92)).toBeInstanceOf(WrongCoordsError);
-            expect(board.placeShip(5, 9)).not.toBeInstanceOf(WrongCoordsError);
-            expect(board.placeShip(9, 9)).not.toBeInstanceOf(WrongCoordsError);
-            expect(board.placeShip(0, 0)).not.toBeInstanceOf(WrongCoordsError);
+            expect(board.placeShip(ship, 10, 9)).toBeInstanceOf(
+                WrongCoordsError
+            );
+            expect(board.placeShip(ship, 0, 92)).toBeInstanceOf(
+                WrongCoordsError
+            );
+            expect(board.placeShip(ship, 5, 9)).not.toBeInstanceOf(
+                WrongCoordsError
+            );
+            expect(board.placeShip(ship, 9, 9)).not.toBeInstanceOf(
+                WrongCoordsError
+            );
+            expect(board.placeShip(ship, 0, 0)).not.toBeInstanceOf(
+                WrongCoordsError
+            );
         });
     });
 });
