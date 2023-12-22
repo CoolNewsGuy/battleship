@@ -152,5 +152,43 @@ describe("Gameboard Class", () => {
                 }
             }
         });
+
+        it("places ships vertically properly", () => {
+            const board = new Gameboard();
+            const ships = [
+                new Ship(2),
+                new Ship(2),
+                new Ship(3),
+                new Ship(4),
+                new Ship(5),
+            ];
+            const coordsPairs: Array<[number, number]> = [
+                [1, 3],
+                [6, 1],
+                [7, 7],
+                [3, 2],
+                [3, 5],
+            ];
+
+            for (let i = 0; i < ships.length; i++) {
+                const row = coordsPairs[i][0];
+                const col = coordsPairs[i][1];
+
+                board.placeShip({
+                    row,
+                    col,
+                    ship: ships[i],
+                    dir: "vertical",
+                });
+
+                // check if board.grid changed
+                for (let j = row; j < ships[i].shipLength + row; j++) {
+                    expect(board.grid[j][col]).toStrictEqual<SpotWithShip>({
+                        ship: ships[i],
+                        spotStatus: Spot.Taken,
+                    });
+                }
+            }
+        });
     });
 });
