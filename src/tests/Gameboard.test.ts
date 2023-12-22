@@ -1,6 +1,7 @@
 import { NotEnoughSpotsError, WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
+import { Spot, type SpotWithShip } from "../types";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
@@ -112,6 +113,44 @@ describe("Gameboard Class", () => {
                     dir: "vertical",
                 })
             ).toBeInstanceOf(NotEnoughSpotsError);
+        });
+
+        it("places ships horizontally properly", () => {
+            const board = new Gameboard();
+            const ships = [
+                new Ship(2),
+                new Ship(2),
+                new Ship(3),
+                new Ship(4),
+                new Ship(5),
+            ];
+            const coordsPairs: Array<[number, number]> = [
+                [1, 3],
+                [6, 1],
+                [9, 7],
+                [0, 2],
+                [3, 5],
+            ];
+
+            for (let i = 0; i < ships.length; i++) {
+                const row = coordsPairs[i][0];
+                const col = coordsPairs[i][1];
+
+                board.placeShip({
+                    row,
+                    col,
+                    ship: ships[i],
+                    dir: "horizontal",
+                });
+
+                // check if board.grid changed
+                for (let j = col; j < ships[i].shipLength + col; j++) {
+                    expect(board.grid[row][j]).toStrictEqual<SpotWithShip>({
+                        ship: ships[i],
+                        spotStatus: Spot.Taken,
+                    });
+                }
+            }
         });
     });
 });
