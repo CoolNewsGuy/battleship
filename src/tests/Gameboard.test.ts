@@ -190,5 +190,76 @@ describe("Gameboard Class", () => {
                 }
             }
         });
+
+        it("returns an error if the ship collapses with another one", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(2), new Ship(3), new Ship(4), new Ship(5)];
+            const coordsPairs: Array<[number, number]> = [
+                [1, 5],
+                [1, 3],
+                [3, 4],
+                [5, 4],
+            ];
+
+            expect(
+                board.placeShip({
+                    ship: ships[0],
+                    row: coordsPairs[0][0],
+                    col: coordsPairs[0][1],
+                    dir: "horizontal",
+                })
+            ).not.toBeInstanceOf(Error);
+
+            expect(
+                board.placeShip({
+                    ship: ships[1],
+                    row: coordsPairs[1][0],
+                    col: coordsPairs[1][1],
+                    dir: "horizontal",
+                })
+            ).toBeInstanceOf(CollapseError);
+
+            expect([
+                board.grid[coordsPairs[1][0]][coordsPairs[1][1]],
+                board.grid[coordsPairs[1][0]][coordsPairs[1][1] + 1],
+                board.grid[coordsPairs[1][0]][coordsPairs[1][1] + 2],
+            ]).toStrictEqual<Array<Spot | SpotWithShip>>([
+                Spot.Empty,
+                Spot.Empty,
+                { ship: ships[0], spotStatus: Spot.Taken },
+            ]);
+
+            expect(
+                board.placeShip({
+                    ship: ships[2],
+                    row: coordsPairs[2][0],
+                    col: coordsPairs[2][1],
+                    dir: "vertical",
+                })
+            ).not.toBeInstanceOf(Error);
+
+            expect(
+                board.placeShip({
+                    ship: ships[3],
+                    row: coordsPairs[3][0],
+                    col: coordsPairs[3][1],
+                    dir: "vertical",
+                })
+            ).toBeInstanceOf(CollapseError);
+
+            expect([
+                board.grid[coordsPairs[3][0]][coordsPairs[3][1]],
+                board.grid[coordsPairs[3][0] + 1][coordsPairs[3][1]],
+                board.grid[coordsPairs[3][0] + 2][coordsPairs[3][1]],
+                board.grid[coordsPairs[3][0] + 3][coordsPairs[3][1]],
+                board.grid[coordsPairs[3][0] + 4][coordsPairs[3][1]],
+            ]).toStrictEqual<Array<Spot | SpotWithShip>>([
+                { ship: ships[2], spotStatus: Spot.Taken },
+                { ship: ships[2], spotStatus: Spot.Taken },
+                Spot.Empty,
+                Spot.Empty,
+                Spot.Empty,
+            ]);
+        });
     });
 });
