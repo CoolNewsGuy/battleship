@@ -37,6 +37,13 @@ export class Gameboard {
             if (!areSpotsEnough) {
                 return new NotEnoughSpotsError(options);
             }
+        } else {
+            const areSpotsEnough =
+                options.row + options.ship.shipLength - 10 <= 0;
+
+            if (!areSpotsEnough) {
+                return new NotEnoughSpotsError(options);
+            }
         }
     }
 }
