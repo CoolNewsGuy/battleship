@@ -1,7 +1,6 @@
 import { WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
-import { PlacingOptions } from "../types";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
