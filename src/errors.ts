@@ -22,7 +22,10 @@ export class NotEnoughSpotsError extends Error {
     readonly message: string;
 
     constructor(options: PlacingOptions) {
-        const leftNeededSpots = options.col + options.ship.shipLength - 10;
+        const leftNeededSpots =
+            (options.dir === "horizontal" ? options.col : options.row) +
+            options.ship.shipLength -
+            10;
 
         super();
         this.name = "NotEnoughSpotsError";
