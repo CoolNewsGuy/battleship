@@ -24,26 +24,17 @@ export class Gameboard {
     placeShip(
         options: PlacingOptions
     ): undefined | WrongCoordsError | NotEnoughSpotsError {
-        const { row, col, dir } = options;
+        const { row, col, dir, ship } = options;
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
         }
 
-        if (dir === "horizontal") {
-            const areSpotsEnough =
-                options.col + options.ship.shipLength - 10 <= 0;
+        const areSpotsEnough =
+            (dir === "horizontal" ? col : row) + ship.shipLength - 10 <= 0;
 
-            if (!areSpotsEnough) {
-                return new NotEnoughSpotsError(options);
-            }
-        } else {
-            const areSpotsEnough =
-                options.row + options.ship.shipLength - 10 <= 0;
-
-            if (!areSpotsEnough) {
-                return new NotEnoughSpotsError(options);
-            }
+        if (!areSpotsEnough) {
+            return new NotEnoughSpotsError(options);
         }
     }
 }
