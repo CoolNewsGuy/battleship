@@ -1,18 +1,23 @@
 import { WrongCoordsError } from "../errors";
-import { Spot, type MatrixOf10x10, type PlacingOptions } from "../types";
+import {
+    Spot,
+    type MatrixOf10x10,
+    type PlacingOptions,
+    type SpotWithShip,
+} from "../types";
 
 export class Gameboard {
-    readonly #grid: MatrixOf10x10<Spot>;
+    readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;
 
     constructor() {
         this.#grid = new Array<null>(10)
             .fill(null)
-            .map(() =>
-                new Array<Spot>(10).fill(Spot.Empty)
-            ) as MatrixOf10x10<Spot>;
+            .map(() => new Array<Spot>(10).fill(Spot.Empty)) as MatrixOf10x10<
+            Spot | SpotWithShip
+        >;
     }
 
-    get grid(): MatrixOf10x10<Spot> {
+    get grid(): MatrixOf10x10<Spot | SpotWithShip> {
         return this.#grid;
     }
 
