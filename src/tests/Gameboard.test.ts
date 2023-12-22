@@ -39,6 +39,7 @@ describe("Gameboard Class", () => {
                             ship,
                             row: coordsPairs[i][0],
                             col: coordsPairs[i][1],
+                            dir: "horizontal",
                         })
                     ).toBeInstanceOf(WrongCoordsError);
 
@@ -50,6 +51,7 @@ describe("Gameboard Class", () => {
                         ship,
                         row: coordsPairs[i][0],
                         col: coordsPairs[i][1],
+                        dir: "horizontal",
                     })
                 ).not.toBeInstanceOf(WrongCoordsError);
             }
@@ -70,6 +72,7 @@ describe("Gameboard Class", () => {
                         row: coordsPairs[i][0],
                         col: coordsPairs[i][1],
                         ship: ships[i],
+                        dir: "horizontal",
                     })
                 ).toBeInstanceOf(NotEnoughSpotsError);
             }
@@ -78,6 +81,7 @@ describe("Gameboard Class", () => {
                     row: coordsPairs[2][0],
                     col: coordsPairs[2][1],
                     ship: ships[2],
+                    dir: "horizontal",
                 })
             ).not.toBeInstanceOf(NotEnoughSpotsError);
         });
