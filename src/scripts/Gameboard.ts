@@ -1,4 +1,4 @@
-import { WrongCoordsError } from "../errors";
+import { NotEnoughSpotsError, WrongCoordsError } from "../errors";
 import {
     Spot,
     type MatrixOf10x10,
@@ -21,11 +21,22 @@ export class Gameboard {
         return this.#grid;
     }
 
-    placeShip(options: PlacingOptions): undefined | WrongCoordsError {
-        const { row, col } = options;
+    placeShip(
+        options: PlacingOptions
+    ): undefined | WrongCoordsError | NotEnoughSpotsError {
+        const { row, col, dir } = options;
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
+        }
+
+        if (dir === "horizontal") {
+            const areSpotsEnough =
+                options.col + options.ship.shipLength - 10 <= 0;
+
+            if (!areSpotsEnough) {
+                return new NotEnoughSpotsError(options);
+            }
         }
     }
 }
