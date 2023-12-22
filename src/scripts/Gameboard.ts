@@ -44,6 +44,13 @@ export class Gameboard {
                     ship,
                 };
             }
+        } else {
+            for (let i = row; i < ship.shipLength + row; i++) {
+                this.#grid[i][col] = {
+                    spotStatus: Spot.Taken,
+                    ship,
+                };
+            }
         }
     }
 }
