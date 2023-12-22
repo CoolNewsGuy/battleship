@@ -12,4 +12,5 @@ export interface PlacingOptions {
     ship: Ship;
     row: number;
     col: number;
+    dir: "horizontal" | "vertical";
 }
