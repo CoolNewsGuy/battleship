@@ -1,4 +1,8 @@
-import { NotEnoughSpotsError, WrongCoordsError } from "../errors";
+import {
+    CollapseError,
+    NotEnoughSpotsError,
+    WrongCoordsError,
+} from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
 import { Spot, type SpotWithShip } from "../types";
