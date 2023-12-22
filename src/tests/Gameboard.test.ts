@@ -54,5 +54,32 @@ describe("Gameboard Class", () => {
                 ).not.toBeInstanceOf(WrongCoordsError);
             }
         });
+
+        it("returns an error if number of horizontal spots is NOT enough for a ship", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(3), new Ship(4), new Ship(5)];
+            const coordsPairs: Array<[number, number]> = [
+                [0, 9],
+                [3, 7],
+                [8, 3],
+            ];
+
+            for (let i = 0; i < 2; i++) {
+                expect(
+                    board.placeShip({
+                        row: coordsPairs[i][0],
+                        col: coordsPairs[i][1],
+                        ship: ships[i],
+                    })
+                ).toBeInstanceOf(NotEnoughSpotsError);
+            }
+            expect(
+                board.placeShip({
+                    row: coordsPairs[2][0],
+                    col: coordsPairs[2][1],
+                    ship: ships[2],
+                })
+            ).not.toBeInstanceOf(NotEnoughSpotsError);
+        });
     });
 });
