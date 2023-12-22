@@ -37,3 +37,15 @@ ship's length: ${options.ship.shipLength}
         `;
     }
 }
+
+export class CollapseError extends Error {
+    readonly name: string;
+    readonly message: string;
+
+    constructor() {
+        super();
+        this.name = "CollapseError";
+        this.message =
+            "The target ship collapses with another already placed one.";
+    }
+}
