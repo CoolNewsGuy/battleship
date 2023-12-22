@@ -1,4 +1,4 @@
-import { WrongCoordsError } from "../errors";
+import { NotEnoughSpotsError, WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
 
