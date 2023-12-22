@@ -36,5 +36,14 @@ export class Gameboard {
         if (!areSpotsEnough) {
             return new NotEnoughSpotsError(options);
         }
+
+        if (dir === "horizontal") {
+            for (let i = col; i < ship.shipLength + col; i++) {
+                this.#grid[row][i] = {
+                    spotStatus: Spot.Taken,
+                    ship,
+                };
+            }
+        }
     }
 }
