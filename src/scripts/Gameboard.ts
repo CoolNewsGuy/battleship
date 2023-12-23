@@ -1,4 +1,8 @@
-import { NotEnoughSpotsError, WrongCoordsError } from "../errors";
+import {
+    CollapseError,
+    NotEnoughSpotsError,
+    WrongCoordsError,
+} from "../errors";
 import {
     Spot,
     type MatrixOf10x10,
@@ -23,7 +27,7 @@ export class Gameboard {
 
     placeShip(
         options: PlacingOptions
-    ): undefined | WrongCoordsError | NotEnoughSpotsError {
+    ): undefined | WrongCoordsError | NotEnoughSpotsError | CollapseError {
         const { row, col, dir, ship } = options;
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
@@ -39,12 +43,24 @@ export class Gameboard {
 
         if (dir === "horizontal") {
             for (let i = col; i < ship.shipLength + col; i++) {
+                if (this.#grid[row][i] instanceof Object) {
+                    return new CollapseError();
+                }
+            }
+
+            for (let i = col; i < ship.shipLength + col; i++) {
                 this.#grid[row][i] = {
                     spotStatus: Spot.Taken,
                     ship,
                 };
             }
         } else {
+            for (let i = row; i < ship.shipLength + row; i++) {
+                if (this.#grid[i][col] instanceof Object) {
+                    return new CollapseError();
+                }
+            }
+
             for (let i = row; i < ship.shipLength + row; i++) {
                 this.#grid[i][col] = {
                     spotStatus: Spot.Taken,
