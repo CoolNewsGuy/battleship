@@ -69,4 +69,10 @@ export class Gameboard {
             }
         }
     }
+
+    receiveAttack(
+        options: Pick<PlacingOptions, "row" | "col">
+    ): undefined | WrongCoordsError {
+        
+    }
 }
