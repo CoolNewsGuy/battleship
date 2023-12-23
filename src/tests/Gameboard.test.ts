@@ -266,4 +266,8 @@ describe("Gameboard Class", () => {
             ]);
         });
     });
+
+    describe("receiveAttack method", () => {
+        
+    });
 });
