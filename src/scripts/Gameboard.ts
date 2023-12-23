@@ -73,6 +73,10 @@ export class Gameboard {
     receiveAttack(
         options: Pick<PlacingOptions, "row" | "col">
     ): undefined | WrongCoordsError {
-        
+        const { row, col } = options;
+
+        if (row < 0 || row > 9 || col < 0 || col > 9) {
+            return new WrongCoordsError(row, col);
+        }
     }
 }
