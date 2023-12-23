@@ -268,6 +268,38 @@ describe("Gameboard Class", () => {
     });
 
     describe("receiveAttack method", () => {
-        
+        it("returns an error if the provided coordinates are out of board", () => {
+            const board = new Gameboard();
+            const wrongCoordsPairs: Array<[number, number]> = [
+                [10, 5],
+                [4, -11],
+                [3, 11],
+            ];
+            const rightCoordsPairs: Array<[number, number]> = [
+                [0, 0],
+                [6, 3],
+                [9, 9],
+            ];
+
+            for (const pair of wrongCoordsPairs) {
+                expect(
+                    board.receiveAttack({
+                        row: pair[0],
+                        col: pair[1],
+                    })
+                ).toBeInstanceOf(WrongCoordsError);
+            }
+
+            expect(board.grid).toStrictEqual(new Gameboard().grid);
+
+            for (const pair of rightCoordsPairs) {
+                expect(
+                    board.receiveAttack({
+                        row: pair[0],
+                        col: pair[1],
+                    })
+                ).not.toBeInstanceOf(WrongCoordsError);
+            }
+        });
     });
 });
