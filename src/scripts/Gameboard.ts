@@ -1,4 +1,5 @@
 import {
+    AttackTargetError,
     CollapseError,
     NotEnoughSpotsError,
     WrongCoordsError,
@@ -72,20 +73,29 @@ export class Gameboard {
 
     receiveAttack(
         options: Pick<PlacingOptions, "row" | "col">
-    ): undefined | WrongCoordsError {
+    ): undefined | WrongCoordsError | AttackTargetError {
         const { row, col } = options;
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
         }
 
-        if (this.#grid[row][col] === Spot.Empty) {
+        const target = this.#grid[row][col];
+
+        if (
+            target === Spot.Missed ||
+            (target instanceof Object && target.spotStatus === Spot.Damaged)
+        ) {
+            return new AttackTargetError(row, col);
+        }
+
+        if (target === Spot.Empty) {
             this.#grid[row][col] = Spot.Missed;
 
             return;
         }
 
-        if (this.#grid[row][col] instanceof Object) {
+        if (target instanceof Object) {
             (this.#grid[row][col] as SpotWithShip).spotStatus = Spot.Damaged;
         }
     }
