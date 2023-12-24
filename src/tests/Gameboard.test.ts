@@ -371,5 +371,48 @@ describe("Gameboard Class", () => {
                 ship: ships[1],
             });
         });
+
+        it("returns an error if a spot is already damaged or missed", () => {
+            const board = new Gameboard();
+            const ship = new Ship(3);
+
+            board.placeShip({
+                ship,
+                row: 3,
+                col: 2,
+                dir: "horizontal",
+            });
+
+            expect(
+                board.receiveAttack({
+                    row: 0,
+                    col: 4,
+                })
+            ).not.toBeInstanceOf(AttackTargetError);
+            expect(
+                board.receiveAttack({
+                    row: 0,
+                    col: 4,
+                })
+            ).toBeInstanceOf(AttackTargetError);
+            expect(board.grid[0][4]).toStrictEqual(Spot.Missed);
+
+            expect(
+                board.receiveAttack({
+                    row: 3,
+                    col: 4,
+                })
+            ).not.toBeInstanceOf(AttackTargetError);
+            expect(
+                board.receiveAttack({
+                    row: 3,
+                    col: 4,
+                })
+            ).toBeInstanceOf(AttackTargetError);
+            expect(board.grid[3][4]).toMatchObject<SpotWithShip>({
+                ship,
+                spotStatus: Spot.Damaged,
+            });
+        });
     });
 });
