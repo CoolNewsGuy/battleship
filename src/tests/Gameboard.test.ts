@@ -1,4 +1,5 @@
 import {
+    AttackTargetError,
     CollapseError,
     NotEnoughSpotsError,
     WrongCoordsError,
