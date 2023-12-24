@@ -96,6 +96,8 @@ export class Gameboard {
         }
 
         if (target instanceof Object) {
+            target.ship.getHit();
+
             (this.#grid[row][col] as SpotWithShip).spotStatus = Spot.Damaged;
         }
     }
