@@ -301,5 +301,17 @@ describe("Gameboard Class", () => {
                 ).not.toBeInstanceOf(WrongCoordsError);
             }
         });
+
+        it("marks an empty spot as missed", () => {
+            const board = new Gameboard();
+
+            board.receiveAttack({ row: 3, col: 5 });
+            board.receiveAttack({ row: 8, col: 9 });
+            board.receiveAttack({ row: 5, col: 5 });
+
+            expect(board.grid[3][5]).toStrictEqual(Spot.Missed);
+            expect(board.grid[8][9]).toStrictEqual(Spot.Missed);
+            expect(board.grid[5][5]).toStrictEqual(Spot.Missed);
+        });
     });
 });
