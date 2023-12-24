@@ -445,6 +445,39 @@ describe("Gameboard Class", () => {
     });
 
     describe("areAllShipsSunk method", () => {
-        
+        it("returns true if all ships are sunk", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(2), new Ship(3)];
+
+            board.placeShip({
+                ship: ships[0],
+                row: 5,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            board.placeShip({
+                ship: ships[0],
+                row: 0,
+                col: 8,
+                dir: "vertical",
+            });
+
+            expect(board.areAllShipsSunk()).toBe(false);
+
+            const spotsToAttack: Array<[number, number]> = [
+                [5, 5],
+                [5, 6],
+                [0, 8],
+                [1, 8],
+                [2, 8],
+            ];
+
+            for (const spot of spotsToAttack) {
+                board.receiveAttack({ row: spot[0], col: spot[1] });
+            }
+
+            expect(board.areAllShipsSunk()).toBe(true);
+        });
     });
 });
