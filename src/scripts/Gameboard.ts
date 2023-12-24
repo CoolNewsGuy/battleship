@@ -81,6 +81,12 @@ export class Gameboard {
 
         if (this.#grid[row][col] === Spot.Empty) {
             this.#grid[row][col] = Spot.Missed;
+
+            return;
+        }
+
+        if (this.#grid[row][col] instanceof Object) {
+            (this.#grid[row][col] as SpotWithShip).spotStatus = Spot.Damaged;
         }
     }
 }
