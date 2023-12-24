@@ -10,7 +10,7 @@ export type ArrayOfLen10<T> = [T, T, T, T, T, T, T, T, T, T];
 export type MatrixOf10x10<T> = ArrayOfLen10<ArrayOfLen10<T>>;
 
 export interface SpotWithShip {
-    spotStatus: Spot;
+    spotStatus: Spot.Taken | Spot.Damaged;
     ship: Ship;
 }
 export interface PlacingOptions {
