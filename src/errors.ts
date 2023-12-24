@@ -49,3 +49,20 @@ export class CollapseError extends Error {
             "The target ship collapses with another already placed one.";
     }
 }
+
+export class AttackTargetError extends Error {
+    readonly name: string;
+    readonly message: string;
+
+    constructor(row: number, col: number) {
+        super();
+        this.name = "AttackTargetError";
+        this.message = `\
+The attack target is already damaged or missed.
+row: ${row}
+col: ${col}
+
+Consider different coords.
+`;
+    }
+}
