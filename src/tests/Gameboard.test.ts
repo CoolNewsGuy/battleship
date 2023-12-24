@@ -415,5 +415,31 @@ describe("Gameboard Class", () => {
                 spotStatus: Spot.Damaged,
             });
         });
+
+        it("increases ship's receivedHits", () => {
+            const board = new Gameboard();
+            const ship = new Ship(3);
+
+            board.placeShip({
+                ship,
+                row: 3,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            expect(ship.receivedHits).toBe(0);
+            expect(ship.isSunk()).toBe(false);
+
+            board.receiveAttack({ row: 3, col: 5 });
+            board.receiveAttack({ row: 3, col: 6 });
+
+            expect(ship.receivedHits).toBe(2);
+            expect(ship.isSunk()).toBe(false);
+
+            board.receiveAttack({ row: 3, col: 7 });
+
+            expect(ship.receivedHits).toBe(3);
+            expect(ship.isSunk()).toBe(true);
+        });
     });
 });
