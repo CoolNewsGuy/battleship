@@ -78,5 +78,9 @@ export class Gameboard {
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
         }
+
+        if (this.#grid[row][col] === Spot.Empty) {
+            this.#grid[row][col] = Spot.Missed;
+        }
     }
 }
