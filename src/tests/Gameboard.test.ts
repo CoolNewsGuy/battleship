@@ -414,6 +414,7 @@ describe("Gameboard Class", () => {
                 ship,
                 spotStatus: Spot.Damaged,
             });
+            expect(ship.receivedHits).toBe(1);
         });
 
         it("increases ship's receivedHits", () => {
