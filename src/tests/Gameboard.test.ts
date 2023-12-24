@@ -443,4 +443,8 @@ describe("Gameboard Class", () => {
             expect(ship.isSunk()).toBe(true);
         });
     });
+
+    describe("areAllShipsSunk method", () => {
+        
+    });
 });
