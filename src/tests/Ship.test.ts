@@ -24,6 +24,8 @@ describe("Ship Class", () => {
         a.getHit();
         a.getHit();
         expect(a.receivedHits).toBe(3);
+        a.getHit();
+        expect(a.receivedHits).toBe(3);
     });
 
     test("'isSunk' method returns true if 'receivedHits' == 'shipLength'", () => {
