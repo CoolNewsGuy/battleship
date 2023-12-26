@@ -10,9 +10,11 @@ import {
     type PlacingOptions,
     type SpotWithShip,
 } from "../types";
+import { type Ship } from "./Ship";
 
 export class Gameboard {
     readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;
+    readonly #placedShips: Ship[];
 
     constructor() {
         this.#grid = new Array<null>(10)
@@ -20,6 +22,7 @@ export class Gameboard {
             .map(() => new Array<Spot>(10).fill(Spot.Empty)) as MatrixOf10x10<
             Spot | SpotWithShip
         >;
+        this.#placedShips = [];
     }
 
     get grid(): MatrixOf10x10<Spot | SpotWithShip> {
