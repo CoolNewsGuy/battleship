@@ -287,6 +287,51 @@ describe("Gameboard Class", () => {
 
             expect(board.placedShips).toStrictEqual(ships);
         });
+
+        it("returns an error if Ship is already placed", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(3), new Ship(4)];
+
+            expect(
+                board.placeShip({
+                    ship: ships[0],
+                    row: 3,
+                    col: 5,
+                    dir: "horizontal",
+                })
+            ).not.toBeInstanceOf(AlreadyPlacedShipError);
+
+            expect(
+                board.placeShip({
+                    ship: ships[1],
+                    row: 5,
+                    col: 8,
+                    dir: "vertical",
+                })
+            ).not.toBeInstanceOf(AlreadyPlacedShipError);
+
+            expect(board.placedShips).toHaveLength(2);
+
+            expect(
+                board.placeShip({
+                    ship: ships[0],
+                    row: 4,
+                    col: 3,
+                    dir: "horizontal",
+                })
+            ).toBeInstanceOf(AlreadyPlacedShipError);
+
+            expect(
+                board.placeShip({
+                    ship: ships[1],
+                    row: 5,
+                    col: 8,
+                    dir: "vertical",
+                })
+            ).toBeInstanceOf(AlreadyPlacedShipError);
+
+            expect(board.placedShips).toHaveLength(2);
+        });
     });
 
     describe("receiveAttack method", () => {
