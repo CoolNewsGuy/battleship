@@ -12,6 +12,10 @@ export class Ship {
     }
 
     getHit(): void {
+        if (this.#receivedHits === this.shipLength) {
+            return;
+        }
+
         this.#receivedHits += 1;
     }
 
