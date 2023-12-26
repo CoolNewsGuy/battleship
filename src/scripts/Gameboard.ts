@@ -29,6 +29,10 @@ export class Gameboard {
         return this.#grid;
     }
 
+    get placedShips(): readonly Ship[] {
+        return this.#placedShips;
+    }
+
     placeShip(
         options: PlacingOptions
     ): undefined | WrongCoordsError | NotEnoughSpotsError | CollapseError {
