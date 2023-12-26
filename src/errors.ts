@@ -66,3 +66,12 @@ Consider different coords.
 `;
     }
 }
+
+export class AlreadyPlacedShipError extends Error {
+    constructor() {
+        super();
+        this.name = "AlreadyPlacedShipError";
+        this.message =
+            "The specified Ship object is already placed on the board";
+    }
+}
