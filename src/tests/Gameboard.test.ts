@@ -266,6 +266,27 @@ describe("Gameboard Class", () => {
                 Spot.Empty,
             ]);
         });
+
+        it("stores newly placed ships in an array", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(2), new Ship(3), new Ship(4)];
+            const coordsPairs: Array<[number, number]> = [
+                [0, 3],
+                [2, 4],
+                [5, 7],
+            ];
+
+            for (let i = 0; i < ships.length; i++) {
+                board.placeShip({
+                    ship: ships[i],
+                    row: coordsPairs[i][0],
+                    col: coordsPairs[i][1],
+                    dir: i < ships.length - 1 ? "horizontal" : "vertical",
+                });
+            }
+
+            expect(board.placedShips).toStrictEqual(ships);
+        });
     });
 
     describe("receiveAttack method", () => {
