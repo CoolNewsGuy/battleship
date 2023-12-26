@@ -10,7 +10,7 @@ import {
     type PlacingOptions,
     type SpotWithShip,
 } from "../types";
-import { type Ship } from "./Ship";
+import { Ship } from "./Ship";
 
 export class Gameboard {
     readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;
@@ -112,6 +112,6 @@ export class Gameboard {
     }
 
     areAllShipsSunk(): boolean {
-        
+        return this.#placedShips.find((ship) => ship.isSunk()) != null;
     }
 }
