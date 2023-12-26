@@ -1,4 +1,5 @@
 import {
+    AlreadyPlacedShipError,
     AttackTargetError,
     CollapseError,
     NotEnoughSpotsError,
