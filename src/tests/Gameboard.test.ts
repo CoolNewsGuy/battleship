@@ -291,7 +291,7 @@ describe("Gameboard Class", () => {
 
         it("returns an error if Ship is already placed", () => {
             const board = new Gameboard();
-            const ships = [new Ship(3), new Ship(4)];
+            const ships = [new Ship(3), new Ship(3)];
 
             expect(
                 board.placeShip({
