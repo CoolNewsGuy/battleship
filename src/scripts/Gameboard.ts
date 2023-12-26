@@ -10,7 +10,7 @@ import {
     type PlacingOptions,
     type SpotWithShip,
 } from "../types";
-import { Ship } from "./Ship";
+import { type Ship } from "./Ship";
 
 export class Gameboard {
     readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;
