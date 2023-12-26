@@ -110,4 +110,8 @@ export class Gameboard {
             (this.#grid[row][col] as SpotWithShip).spotStatus = Spot.Damaged;
         }
     }
+
+    areAllShipsSunk(): boolean {
+        
+    }
 }
