@@ -76,6 +76,8 @@ export class Gameboard {
                 };
             }
         }
+
+        this.#placedShips.push(ship);
     }
 
     receiveAttack(
