@@ -1,4 +1,5 @@
 import {
+    AlreadyPlacedShipError,
     AttackTargetError,
     CollapseError,
     NotEnoughSpotsError,
@@ -35,8 +36,17 @@ export class Gameboard {
 
     placeShip(
         options: PlacingOptions
-    ): undefined | WrongCoordsError | NotEnoughSpotsError | CollapseError {
+    ):
+        | undefined
+        | WrongCoordsError
+        | NotEnoughSpotsError
+        | CollapseError
+        | AlreadyPlacedShipError {
         const { row, col, dir, ship } = options;
+
+        if (this.#placedShips.includes(ship)) {
+            return new AlreadyPlacedShipError();
+        }
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
             return new WrongCoordsError(row, col);
