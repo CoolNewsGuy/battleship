@@ -8,4 +8,8 @@ describe("Player class", () => {
         expect(p.name).toBe("John");
         expect(p.board).toStrictEqual(new Gameboard());
     });
+
+    describe("attack method", () => {
+        
+    })
 });
