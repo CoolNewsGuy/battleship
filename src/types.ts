@@ -1,3 +1,4 @@
+import { type Player } from "./scripts/Player";
 import { type Ship } from "./scripts/Ship";
 
 export const enum Spot {
@@ -18,4 +19,9 @@ export interface PlacingOptions {
     row: number;
     col: number;
     dir: "horizontal" | "vertical";
+}
+export interface AttackOptions {
+    player: Player;
+    row: number;
+    col: number;
 }
