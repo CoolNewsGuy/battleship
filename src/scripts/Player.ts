@@ -14,9 +14,9 @@ export class Player {
     attack(
         options: AttackOptions
     ): undefined | WrongCoordsError | AttackReceiverError {
-        const { row, col, player } = options;
+        const { row, col, receiver } = options;
 
-        if (player === this) {
+        if (receiver === this) {
             return new AttackReceiverError();
         }
 
@@ -24,6 +24,6 @@ export class Player {
             return new WrongCoordsError(row, col);
         }
 
-        return player.board.receiveAttack(options);
+        return receiver.board.receiveAttack(options);
     }
 }

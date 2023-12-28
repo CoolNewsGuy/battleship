@@ -21,7 +21,7 @@ export interface PlacingOptions {
     dir: "horizontal" | "vertical";
 }
 export interface AttackOptions {
-    player: Player;
+    receiver: Player;
     row: number;
     col: number;
 }

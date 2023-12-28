@@ -18,7 +18,7 @@ describe("Player class", () => {
 
             expect(
                 p1.attack({
-                    player: p2,
+                    receiver: p2,
                     row: 5,
                     col: 10,
                 })
@@ -26,7 +26,7 @@ describe("Player class", () => {
 
             expect(
                 p1.attack({
-                    player: p2,
+                    receiver: p2,
                     row: 10,
                     col: -9,
                 })
@@ -42,7 +42,7 @@ describe("Player class", () => {
 
             expect(
                 p1.attack({
-                    player: p1,
+                    receiver: p1,
                     row: 3,
                     col: 5,
                 })
@@ -55,9 +55,9 @@ describe("Player class", () => {
             const p1 = new Player("foo");
             const p2 = new Player("bar");
 
-            p1.attack({ player: p2, row: 5, col: 6 });
-            p1.attack({ player: p2, row: 3, col: 8 });
-            p1.attack({ player: p2, row: 1, col: 2 });
+            p1.attack({ receiver: p2, row: 5, col: 6 });
+            p1.attack({ receiver: p2, row: 3, col: 8 });
+            p1.attack({ receiver: p2, row: 1, col: 2 });
 
             expect([
                 p2.board.grid[5][6],
