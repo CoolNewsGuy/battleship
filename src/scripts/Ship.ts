@@ -1,9 +1,11 @@
 export class Ship {
     readonly shipLength: number;
+    isPlacedInBoard: boolean;
     #receivedHits: number;
 
     constructor(shipLength: number) {
         this.shipLength = shipLength;
+        this.isPlacedInBoard = false;
         this.#receivedHits = 0;
     }
 
