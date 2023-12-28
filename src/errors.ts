@@ -50,7 +50,7 @@ export class CollapseError extends Error {
     }
 }
 
-export class AttackTargetError extends Error {
+export class AlreadyAttackedSpotError extends Error {
     readonly name: string;
     readonly message: string;
 

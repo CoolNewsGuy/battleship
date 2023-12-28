@@ -1,6 +1,6 @@
 import {
     AttackReceiverError,
-    type AttackTargetError,
+    type AlreadyAttackedSpotError,
     WrongCoordsError,
 } from "../errors";
 import { type AttackOptions } from "../types";
@@ -17,7 +17,11 @@ export class Player {
 
     attack(
         options: AttackOptions
-    ): undefined | WrongCoordsError | AttackReceiverError | AttackTargetError {
+    ):
+        | undefined
+        | WrongCoordsError
+        | AttackReceiverError
+        | AlreadyAttackedSpotError {
         const { row, col, receiver } = options;
 
         if (receiver === this) {

@@ -1,6 +1,6 @@
 import {
     AlreadyPlacedShipError,
-    AttackTargetError,
+    AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
     WrongCoordsError,
@@ -92,7 +92,7 @@ export class Gameboard {
 
     receiveAttack(
         options: Pick<PlacingOptions, "row" | "col">
-    ): undefined | WrongCoordsError | AttackTargetError {
+    ): undefined | WrongCoordsError | AlreadyAttackedSpotError {
         const { row, col } = options;
 
         if (row < 0 || row > 9 || col < 0 || col > 9) {
@@ -105,7 +105,7 @@ export class Gameboard {
             target === Spot.Missed ||
             (target instanceof Object && target.spotStatus === Spot.Damaged)
         ) {
-            return new AttackTargetError(row, col);
+            return new AlreadyAttackedSpotError(row, col);
         }
 
         if (target === Spot.Empty) {

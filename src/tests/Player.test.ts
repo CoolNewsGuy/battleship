@@ -1,4 +1,8 @@
-import { AttackReceiverError, WrongCoordsError } from "../errors";
+import {
+    AttackReceiverError,
+    AlreadyAttackedSpotError,
+    WrongCoordsError,
+} from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
@@ -124,6 +128,55 @@ describe("Player class", () => {
                 spotStatus: Spot.Taken,
                 ship: ships[1],
             });
+        });
+
+        it("returns an error if a spot is already damaged or missed", () => {
+            const p1 = new Player("foo");
+            const p2 = new Player("bar");
+            const ship = new Ship(3);
+
+            p2.board.placeShip({
+                ship,
+                row: 3,
+                col: 2,
+                dir: "horizontal",
+            });
+
+            expect(
+                p1.attack({
+                    receiver: p2,
+                    row: 0,
+                    col: 4,
+                })
+            ).not.toBeInstanceOf(AlreadyAttackedSpotError);
+            expect(
+                p1.attack({
+                    receiver: p2,
+                    row: 0,
+                    col: 4,
+                })
+            ).toBeInstanceOf(AlreadyAttackedSpotError);
+            expect(p2.board.grid[0][4]).toStrictEqual(Spot.Missed);
+
+            expect(
+                p1.attack({
+                    receiver: p2,
+                    row: 3,
+                    col: 4,
+                })
+            ).not.toBeInstanceOf(AlreadyAttackedSpotError);
+            expect(
+                p1.attack({
+                    receiver: p2,
+                    row: 3,
+                    col: 4,
+                })
+            ).toBeInstanceOf(AlreadyAttackedSpotError);
+            expect(p2.board.grid[3][4]).toMatchObject<SpotWithShip>({
+                ship,
+                spotStatus: Spot.Damaged,
+            });
+            expect(ship.receivedHits).toBe(1);
         });
     });
 });

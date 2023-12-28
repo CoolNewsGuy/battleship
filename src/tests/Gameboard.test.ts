@@ -1,6 +1,6 @@
 import {
     AlreadyPlacedShipError,
-    AttackTargetError,
+    AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
     WrongCoordsError,
@@ -456,13 +456,13 @@ describe("Gameboard Class", () => {
                     row: 0,
                     col: 4,
                 })
-            ).not.toBeInstanceOf(AttackTargetError);
+            ).not.toBeInstanceOf(AlreadyAttackedSpotError);
             expect(
                 board.receiveAttack({
                     row: 0,
                     col: 4,
                 })
-            ).toBeInstanceOf(AttackTargetError);
+            ).toBeInstanceOf(AlreadyAttackedSpotError);
             expect(board.grid[0][4]).toStrictEqual(Spot.Missed);
 
             expect(
@@ -470,13 +470,13 @@ describe("Gameboard Class", () => {
                     row: 3,
                     col: 4,
                 })
-            ).not.toBeInstanceOf(AttackTargetError);
+            ).not.toBeInstanceOf(AlreadyAttackedSpotError);
             expect(
                 board.receiveAttack({
                     row: 3,
                     col: 4,
                 })
-            ).toBeInstanceOf(AttackTargetError);
+            ).toBeInstanceOf(AlreadyAttackedSpotError);
             expect(board.grid[3][4]).toMatchObject<SpotWithShip>({
                 ship,
                 spotStatus: Spot.Damaged,
