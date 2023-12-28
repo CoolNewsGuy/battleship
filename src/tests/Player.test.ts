@@ -1,4 +1,4 @@
-import { WrongCoordsError } from "../errors";
+import { AttackReceiverError, WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Player } from "../scripts/Player";
 import { Spot } from "../types";
