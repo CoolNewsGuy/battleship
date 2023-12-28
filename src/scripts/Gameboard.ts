@@ -44,7 +44,7 @@ export class Gameboard {
         | AlreadyPlacedShipError {
         const { row, col, dir, ship } = options;
 
-        if (this.#placedShips.includes(ship)) {
+        if (this.#placedShips.includes(ship) || ship.isPlacedInBoard) {
             return new AlreadyPlacedShipError();
         }
 
@@ -87,6 +87,7 @@ export class Gameboard {
             }
         }
 
+        ship.isPlacedInBoard = true;
         this.#placedShips.push(ship);
     }
 
