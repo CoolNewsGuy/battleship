@@ -1,11 +1,12 @@
 import { Ship } from "../scripts/Ship";
 
 describe("Ship Class", () => {
-    it("creates an object with readonly 'shipsLength' as the only pub prop", () => {
+    it("has readonly 'shipLength' and 'isPlacedInBoard' pub props", () => {
         const a = new Ship(3);
 
         expect(a.shipLength).toBe(3);
-        expect(Object.keys(a)).toHaveLength(1);
+        expect(a.isPlacedInBoard).toBe(false);
+        expect(Object.keys(a)).toHaveLength(2);
     });
 
     it("has a getter for 'receivedHits', which is a private prop", () => {
