@@ -50,5 +50,20 @@ describe("Player class", () => {
 
             expect(p1.board.grid[3][5]).toStrictEqual(Spot.Empty);
         });
+
+        it("marks an empty spot as missed", () => {
+            const p1 = new Player("foo");
+            const p2 = new Player("bar");
+
+            p1.attack({ player: p2, row: 5, col: 6 });
+            p1.attack({ player: p2, row: 3, col: 8 });
+            p1.attack({ player: p2, row: 1, col: 2 });
+
+            expect([
+                p2.board.grid[5][6],
+                p2.board.grid[3][8],
+                p2.board.grid[1][2],
+            ]).toStrictEqual([Spot.Missed, Spot.Missed, Spot.Missed]);
+        });
     });
 });
