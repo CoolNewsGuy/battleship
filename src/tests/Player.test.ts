@@ -1,7 +1,8 @@
 import { AttackReceiverError, WrongCoordsError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Player } from "../scripts/Player";
-import { Spot } from "../types";
+import { Ship } from "../scripts/Ship";
+import { Spot, type SpotWithShip } from "../types";
 
 describe("Player class", () => {
     it("has readonly 'name' and 'board' pub props", () => {
@@ -64,6 +65,65 @@ describe("Player class", () => {
                 p2.board.grid[3][8],
                 p2.board.grid[1][2],
             ]).toStrictEqual([Spot.Missed, Spot.Missed, Spot.Missed]);
+        });
+
+        it("marks a taken spot as damaged", () => {
+            const p1 = new Player("foo");
+            const p2 = new Player("bar");
+            const ships = [new Ship(3), new Ship(5)];
+
+            p1.board.placeShip({
+                ship: ships[0],
+                row: 3,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            p2.board.placeShip({
+                ship: ships[1],
+                row: 5,
+                col: 4,
+                dir: "vertical",
+            });
+
+            p1.attack({ receiver: p2, row: 7, col: 4 });
+            p1.attack({ receiver: p2, row: 8, col: 4 });
+            p2.attack({ receiver: p1, row: 3, col: 5 });
+            p2.attack({ receiver: p1, row: 3, col: 6 });
+
+            expect(p1.board.grid[3][5]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Damaged,
+                ship: ships[0],
+            });
+            expect(p1.board.grid[3][6]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Damaged,
+                ship: ships[0],
+            });
+            expect(p1.board.grid[3][7]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Taken,
+                ship: ships[0],
+            });
+
+            expect(p2.board.grid[5][4]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Taken,
+                ship: ships[1],
+            });
+            expect(p2.board.grid[6][4]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Taken,
+                ship: ships[1],
+            });
+            expect(p2.board.grid[7][4]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Damaged,
+                ship: ships[1],
+            });
+            expect(p2.board.grid[8][4]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Damaged,
+                ship: ships[1],
+            });
+            expect(p2.board.grid[9][4]).toMatchObject<SpotWithShip>({
+                spotStatus: Spot.Taken,
+                ship: ships[1],
+            });
         });
     });
 });
