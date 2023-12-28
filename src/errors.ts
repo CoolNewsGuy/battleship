@@ -75,3 +75,14 @@ export class AlreadyPlacedShipError extends Error {
             "The specified Ship object is already placed on the board";
     }
 }
+
+export class AttackReceiverError extends Error {
+    readonly name: string;
+    readonly message: string;
+
+    constructor() {
+        super();
+        this.name = "AttackReceiverError";
+        this.message = "Attack receiver is an invalid target.";
+    }
+}
