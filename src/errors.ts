@@ -58,7 +58,7 @@ export class AlreadyAttackedSpotError extends Error {
         super();
         this.name = "AttackTargetError";
         this.message = `\
-The attack target is already damaged or missed.
+The targeted spot is already damaged or missed.
 row: ${row}
 col: ${col}
 
