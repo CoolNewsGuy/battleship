@@ -13,7 +13,7 @@ describe("Ship Class", () => {
         const a = new Ship(3);
 
         expect(a.receivedHits).toBe(0);
-        expect(Object.keys(a)).toHaveLength(1);
+        expect(Object.keys(a)).toHaveLength(2);
     });
 
     test("'receivedHits' is incremented when calling 'getHit' method", () => {
