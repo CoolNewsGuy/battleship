@@ -68,6 +68,9 @@ Consider different coords.
 }
 
 export class AlreadyPlacedShipError extends Error {
+    readonly name: string;
+    readonly message: string;
+
     constructor() {
         super();
         this.name = "AlreadyPlacedShipError";
