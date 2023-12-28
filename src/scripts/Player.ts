@@ -1,4 +1,8 @@
-import { AttackReceiverError, WrongCoordsError } from "../errors";
+import {
+    AttackReceiverError,
+    type AttackTargetError,
+    WrongCoordsError,
+} from "../errors";
 import { type AttackOptions } from "../types";
 import { Gameboard } from "./Gameboard";
 
@@ -13,7 +17,7 @@ export class Player {
 
     attack(
         options: AttackOptions
-    ): undefined | WrongCoordsError | AttackReceiverError {
+    ): undefined | WrongCoordsError | AttackReceiverError | AttackTargetError {
         const { row, col, receiver } = options;
 
         if (receiver === this) {
