@@ -178,5 +178,32 @@ describe("Player class", () => {
             });
             expect(ship.receivedHits).toBe(1);
         });
+
+        it("increases ship's receivedHits", () => {
+            const p1 = new Player("foo");
+            const p2 = new Player("bar");
+            const ship = new Ship(3);
+
+            p2.board.placeShip({
+                ship,
+                row: 3,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            expect(ship.receivedHits).toBe(0);
+            expect(ship.isSunk()).toBe(false);
+
+            p1.attack({ receiver: p2, row: 3, col: 5 });
+            p1.attack({ receiver: p2, row: 3, col: 6 });
+
+            expect(ship.receivedHits).toBe(2);
+            expect(ship.isSunk()).toBe(false);
+
+            p1.attack({ receiver: p2, row: 3, col: 7 });
+
+            expect(ship.receivedHits).toBe(3);
+            expect(ship.isSunk()).toBe(true);
+        });
     });
 });
