@@ -333,6 +333,39 @@ describe("Gameboard Class", () => {
 
             expect(board.placedShips).toHaveLength(2);
         });
+
+        it("returns an error if a ship is in another board", () => {
+            const b1 = new Gameboard();
+            const b2 = new Gameboard();
+            const ship = new Ship(3);
+
+            expect(
+                b1.placeShip({
+                    ship,
+                    row: 3,
+                    col: 5,
+                    dir: "horizontal",
+                })
+            ).not.toBeInstanceOf(AlreadyPlacedShipError);
+            expect(
+                b2.placeShip({
+                    ship,
+                    row: 4,
+                    col: 2,
+                    dir: "vertical",
+                })
+            ).toBeInstanceOf(AlreadyPlacedShipError);
+
+            for (let c = 5; c < 8; c++) {
+                expect(b1.grid[3][c]).toStrictEqual<SpotWithShip>({
+                    ship,
+                    spotStatus: Spot.Taken,
+                });
+            }
+            for (let r = 4; r < 7; r++) {
+                expect(b1.grid[r][2]).toStrictEqual<Spot>(Spot.Empty);
+            }
+        });
     });
 
     describe("receiveAttack method", () => {
