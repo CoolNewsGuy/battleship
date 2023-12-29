@@ -81,6 +81,8 @@ describe("Gameboard Class", () => {
                         dir: "horizontal",
                     })
                 ).toBeInstanceOf(NotEnoughSpotsError);
+
+                expect(ships[i].isPlacedInBoard).toBe(false);
             }
             expect(
                 board.placeShip({
@@ -90,6 +92,8 @@ describe("Gameboard Class", () => {
                     dir: "horizontal",
                 })
             ).not.toBeInstanceOf(NotEnoughSpotsError);
+
+            expect(ships[2].isPlacedInBoard).toBe(true);
         });
 
         it("returns an error if number of vertical spots is NOT enough for a ship", () => {
@@ -110,6 +114,8 @@ describe("Gameboard Class", () => {
                         dir: "vertical",
                     })
                 ).not.toBeInstanceOf(NotEnoughSpotsError);
+
+                expect(ships[i].isPlacedInBoard).toBe(true);
             }
             expect(
                 board.placeShip({
@@ -119,6 +125,8 @@ describe("Gameboard Class", () => {
                     dir: "vertical",
                 })
             ).toBeInstanceOf(NotEnoughSpotsError);
+
+            expect(ships[2].isPlacedInBoard).toBe(false);
         });
 
         it("places ships horizontally properly", () => {
@@ -226,6 +234,11 @@ describe("Gameboard Class", () => {
             ).toBeInstanceOf(CollapseError);
 
             expect([
+                ships[0].isPlacedInBoard,
+                ships[1].isPlacedInBoard,
+            ]).toStrictEqual([true, false]);
+
+            expect([
                 board.grid[coordsPairs[1][0]][coordsPairs[1][1]],
                 board.grid[coordsPairs[1][0]][coordsPairs[1][1] + 1],
                 board.grid[coordsPairs[1][0]][coordsPairs[1][1] + 2],
@@ -252,6 +265,11 @@ describe("Gameboard Class", () => {
                     dir: "vertical",
                 })
             ).toBeInstanceOf(CollapseError);
+
+            expect([
+                ships[2].isPlacedInBoard,
+                ships[3].isPlacedInBoard,
+            ]).toStrictEqual([true, false]);
 
             expect([
                 board.grid[coordsPairs[3][0]][coordsPairs[3][1]],
