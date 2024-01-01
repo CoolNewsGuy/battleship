@@ -1,4 +1,8 @@
-import { AttackReceiverError, AlreadyAttackedSpotError } from "../errors";
+import {
+    AttackReceiverError,
+    AlreadyAttackedSpotError,
+    GameoverError,
+} from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
@@ -182,6 +186,48 @@ describe("Player class", () => {
 
             expect(ship.receivedHits).toBe(3);
             expect(ship.isSunk()).toBe(true);
+        });
+
+        it("returns an error if all ships are already sunk", () => {
+            const p1 = new Player("foo");
+            const p2 = new Player("bar");
+            const ships = [new Ship(2), new Ship(3)];
+
+            p2.board.placeShip({
+                ship: ships[0],
+                row: 9,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            p2.board.placeShip({
+                ship: ships[1],
+                row: 7,
+                col: 4,
+                dir: "vertical",
+            });
+
+            expect(p2.board.areAllShipsSunk()).toBe(false);
+
+            p1.attack({ row: 9, col: 5, receiver: p2 });
+            p1.attack({ row: 9, col: 6, receiver: p2 });
+
+            expect(p2.board.areAllShipsSunk()).toBe(false);
+            expect(ships[0].isSunk()).toBe(true);
+
+            p1.attack({ row: 7, col: 4, receiver: p2 });
+            p1.attack({ row: 8, col: 4, receiver: p2 });
+            p1.attack({ row: 9, col: 4, receiver: p2 });
+
+            expect(p2.board.areAllShipsSunk()).toBe(true);
+
+            expect(
+                p1.attack({
+                    row: 0,
+                    col: 2,
+                    receiver: p2,
+                })
+            ).toBeInstanceOf(GameoverError);
         });
     });
 });
