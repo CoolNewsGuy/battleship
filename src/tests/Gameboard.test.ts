@@ -489,6 +489,46 @@ describe("Gameboard Class", () => {
             expect(ship.receivedHits).toBe(3);
             expect(ship.isSunk()).toBe(true);
         });
+
+        it("returns an error if all ships are already sunk", () => {
+            const board = new Gameboard();
+            const ships = [new Ship(2), new Ship(3)];
+
+            board.placeShip({
+                ship: ships[0],
+                row: 9,
+                col: 5,
+                dir: "horizontal",
+            });
+
+            board.placeShip({
+                ship: ships[1],
+                row: 7,
+                col: 4,
+                dir: "vertical",
+            });
+
+            expect(board.areAllShipsSunk()).toBe(false);
+
+            board.receiveAttack({ row: 9, col: 5 });
+            board.receiveAttack({ row: 9, col: 6 });
+
+            expect(board.areAllShipsSunk()).toBe(false);
+            expect(ships[0].isSunk()).toBe(true);
+
+            board.receiveAttack({ row: 7, col: 4 });
+            board.receiveAttack({ row: 8, col: 4 });
+            board.receiveAttack({ row: 9, col: 4 });
+
+            expect(board.areAllShipsSunk()).toBe(true);
+
+            expect(
+                board.receiveAttack({
+                    row: 0,
+                    col: 2,
+                })
+            ).toBeInstanceOf(GameoverError);
+        });
     });
 
     describe("areAllShipsSunk method", () => {
