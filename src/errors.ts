@@ -88,3 +88,14 @@ export class AttackReceiverError extends Error {
         this.message = "Attack receiver is an invalid target.";
     }
 }
+
+export class GameoverError extends Error {
+    readonly name: string;
+    readonly message: string;
+
+    constructor() {
+        super();
+        this.name = "GameoverError";
+        this.message = "Attacking is impossible since the game was over.";
+    }
+}
