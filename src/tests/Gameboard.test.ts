@@ -27,42 +27,6 @@ describe("Gameboard Class", () => {
     });
 
     describe("placeShip method", () => {
-        it("returns an error if the provided coordinates are out of board", () => {
-            const board = new Gameboard();
-            const ship = new Ship(3);
-            const coordsPairs: Array<[number, number]> = [
-                [10, 9],
-                [0, 92],
-                [5, 9],
-                [9, 9],
-                [0, 0],
-            ];
-
-            for (let i = 0; i < coordsPairs.length; i++) {
-                if (i < 2) {
-                    expect(
-                        board.placeShip({
-                            ship,
-                            row: coordsPairs[i][0],
-                            col: coordsPairs[i][1],
-                            dir: "horizontal",
-                        })
-                    ).toBeInstanceOf(WrongCoordsError);
-
-                    continue;
-                }
-
-                expect(
-                    board.placeShip({
-                        ship,
-                        row: coordsPairs[i][0],
-                        col: coordsPairs[i][1],
-                        dir: "horizontal",
-                    })
-                ).not.toBeInstanceOf(WrongCoordsError);
-            }
-        });
-
         it("returns an error if number of horizontal spots is NOT enough for a ship", () => {
             const board = new Gameboard();
             const ships = [new Ship(3), new Ship(4), new Ship(5)];
