@@ -354,6 +354,13 @@ describe("Gameboard Class", () => {
         it("marks an empty spot as missed", () => {
             const board = new Gameboard();
 
+            board.placeShip({
+                ship: new Ship(2),
+                row: 0,
+                col: 5,
+                dir: "horizontal",
+            });
+
             board.receiveAttack({ row: 3, col: 5 });
             board.receiveAttack({ row: 8, col: 9 });
             board.receiveAttack({ row: 5, col: 5 });

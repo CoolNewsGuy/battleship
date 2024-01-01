@@ -31,6 +31,13 @@ describe("Player class", () => {
             const p1 = new Player("foo");
             const p2 = new Player("bar");
 
+            p2.board.placeShip({
+                ship: new Ship(2),
+                row: 0,
+                col: 0,
+                dir: "horizontal",
+            });
+
             p1.attack({ receiver: p2, row: 5, col: 6 });
             p1.attack({ receiver: p2, row: 3, col: 8 });
             p1.attack({ receiver: p2, row: 1, col: 2 });
