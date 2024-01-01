@@ -17,12 +17,12 @@ export interface SpotWithShip {
 }
 export interface PlacingOptions {
     ship: Ship;
-    row: number;
-    col: number;
+    row: NumFrom0To9;
+    col: NumFrom0To9;
     dir: "horizontal" | "vertical";
 }
 export interface AttackOptions {
     receiver: Player;
-    row: number;
-    col: number;
+    row: NumFrom0To9;
+    col: NumFrom0To9;
 }
