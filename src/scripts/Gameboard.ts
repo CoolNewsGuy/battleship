@@ -113,6 +113,6 @@ export class Gameboard {
     }
 
     areAllShipsSunk(): boolean {
-        return this.#placedShips.find((ship) => ship.isSunk()) != null;
+        return this.#placedShips.find((ship) => !ship.isSunk()) == null;
     }
 }
