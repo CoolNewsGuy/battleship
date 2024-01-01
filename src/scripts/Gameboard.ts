@@ -93,7 +93,7 @@ export class Gameboard {
 
     receiveAttack(
         options: Pick<PlacingOptions, "row" | "col">
-    ): undefined | WrongCoordsError | AlreadyAttackedSpotError {
+    ): undefined | AlreadyAttackedSpotError {
         const { row, col } = options;
 
         const target = this.#grid[row][col];
