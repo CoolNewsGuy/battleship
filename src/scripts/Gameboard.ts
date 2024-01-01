@@ -96,10 +96,6 @@ export class Gameboard {
     ): undefined | WrongCoordsError | AlreadyAttackedSpotError {
         const { row, col } = options;
 
-        if (row < 0 || row > 9 || col < 0 || col > 9) {
-            return new WrongCoordsError(row, col);
-        }
-
         const target = this.#grid[row][col];
 
         if (
