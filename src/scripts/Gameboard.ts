@@ -3,7 +3,6 @@ import {
     AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
-    WrongCoordsError,
 } from "../errors";
 import {
     Spot,
@@ -38,7 +37,6 @@ export class Gameboard {
         options: PlacingOptions
     ):
         | undefined
-        | WrongCoordsError
         | NotEnoughSpotsError
         | CollapseError
         | AlreadyPlacedShipError {
@@ -46,10 +44,6 @@ export class Gameboard {
 
         if (this.#placedShips.includes(ship) || ship.isPlacedInBoard) {
             return new AlreadyPlacedShipError();
-        }
-
-        if (row < 0 || row > 9 || col < 0 || col > 9) {
-            return new WrongCoordsError(row, col);
         }
 
         const areSpotsEnough =
