@@ -3,6 +3,7 @@ import {
     AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
+    GameoverError,
 } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
