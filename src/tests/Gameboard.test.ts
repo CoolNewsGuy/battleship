@@ -544,7 +544,7 @@ describe("Gameboard Class", () => {
             });
 
             board.placeShip({
-                ship: ships[0],
+                ship: ships[1],
                 row: 0,
                 col: 8,
                 dir: "vertical",
@@ -562,6 +562,11 @@ describe("Gameboard Class", () => {
 
             for (const spot of spotsToAttack) {
                 board.receiveAttack({ row: spot[0], col: spot[1] });
+
+                if (spot[0] === 0 && spot[1] === 8) {
+                    expect(ships[0].isSunk()).toBe(true);
+                    expect(board.areAllShipsSunk()).toBe(false);
+                }
             }
 
             expect(board.areAllShipsSunk()).toBe(true);
