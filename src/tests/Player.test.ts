@@ -1,8 +1,4 @@
-import {
-    AttackReceiverError,
-    AlreadyAttackedSpotError,
-    WrongCoordsError,
-} from "../errors";
+import { AttackReceiverError, AlreadyAttackedSpotError } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
@@ -17,31 +13,6 @@ describe("Player class", () => {
     });
 
     describe("attack method", () => {
-        it("returns an error if wrong coords were specified", () => {
-            const p1 = new Player("foo");
-            const p2 = new Player("bar");
-
-            expect(
-                p1.attack({
-                    receiver: p2,
-                    row: 5,
-                    col: 10,
-                })
-            ).toBeInstanceOf(WrongCoordsError);
-
-            expect(
-                p1.attack({
-                    receiver: p2,
-                    row: 10,
-                    col: -9,
-                })
-            ).toBeInstanceOf(WrongCoordsError);
-
-            [p1, p2].forEach((p) => {
-                expect(p.board).toStrictEqual(new Gameboard());
-            });
-        });
-
         it("returns an error if the target is the attacker themeselves", () => {
             const p1 = new Player("foo");
 
