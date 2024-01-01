@@ -1,4 +1,8 @@
-import { AttackReceiverError, type AlreadyAttackedSpotError } from "../errors";
+import {
+    AttackReceiverError,
+    type AlreadyAttackedSpotError,
+    type GameoverError,
+} from "../errors";
 import { type AttackOptions } from "../types";
 import { Gameboard } from "./Gameboard";
 
@@ -13,7 +17,11 @@ export class Player {
 
     attack(
         options: AttackOptions
-    ): undefined | AttackReceiverError | AlreadyAttackedSpotError {
+    ):
+        | undefined
+        | AttackReceiverError
+        | AlreadyAttackedSpotError
+        | GameoverError {
         const { receiver } = options;
 
         if (receiver === this) {
