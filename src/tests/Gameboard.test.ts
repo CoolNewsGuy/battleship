@@ -3,11 +3,10 @@ import {
     AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
-    WrongCoordsError,
 } from "../errors";
 import { Gameboard } from "../scripts/Gameboard";
 import { Ship } from "../scripts/Ship";
-import { Spot, type SpotWithShip } from "../types";
+import { type NumFrom0To9, Spot, type SpotWithShip } from "../types";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
@@ -30,7 +29,7 @@ describe("Gameboard Class", () => {
         it("returns an error if number of horizontal spots is NOT enough for a ship", () => {
             const board = new Gameboard();
             const ships = [new Ship(3), new Ship(4), new Ship(5)];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 9],
                 [3, 7],
                 [8, 3],
@@ -63,7 +62,7 @@ describe("Gameboard Class", () => {
         it("returns an error if number of vertical spots is NOT enough for a ship", () => {
             const board = new Gameboard();
             const ships = [new Ship(3), new Ship(4), new Ship(5)];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 9],
                 [3, 7],
                 [8, 3],
@@ -102,7 +101,7 @@ describe("Gameboard Class", () => {
                 new Ship(4),
                 new Ship(5),
             ];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [1, 3],
                 [6, 1],
                 [9, 7],
@@ -140,7 +139,7 @@ describe("Gameboard Class", () => {
                 new Ship(4),
                 new Ship(5),
             ];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [1, 3],
                 [6, 1],
                 [7, 7],
@@ -172,7 +171,7 @@ describe("Gameboard Class", () => {
         it("returns an error if the ship collapses with another one", () => {
             const board = new Gameboard();
             const ships = [new Ship(2), new Ship(3), new Ship(4), new Ship(5)];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [1, 5],
                 [1, 3],
                 [3, 4],
@@ -253,7 +252,7 @@ describe("Gameboard Class", () => {
         it("stores newly placed ships in an array", () => {
             const board = new Gameboard();
             const ships = [new Ship(2), new Ship(3), new Ship(4)];
-            const coordsPairs: Array<[number, number]> = [
+            const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 3],
                 [2, 4],
                 [5, 7],
@@ -513,7 +512,7 @@ describe("Gameboard Class", () => {
 
             expect(board.areAllShipsSunk()).toBe(false);
 
-            const spotsToAttack: Array<[number, number]> = [
+            const spotsToAttack: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [5, 5],
                 [5, 6],
                 [0, 8],
