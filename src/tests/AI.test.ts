@@ -6,4 +6,8 @@ describe("AI Class", () => {
 
         expect(ai.name).toBe("AI");
     });
+
+    describe("overrided attack method", () => {
+        
+    });
 });
