@@ -3,6 +3,7 @@ import {
     AlreadyAttackedSpotError,
     CollapseError,
     NotEnoughSpotsError,
+    GameoverError,
 } from "../errors";
 import {
     Spot,
@@ -87,7 +88,11 @@ export class Gameboard {
 
     receiveAttack(
         options: Pick<PlacingOptions, "row" | "col">
-    ): undefined | AlreadyAttackedSpotError {
+    ): undefined | AlreadyAttackedSpotError | GameoverError {
+        if (this.areAllShipsSunk()) {
+            return new GameoverError();
+        }
+
         const { row, col } = options;
 
         const target = this.#grid[row][col];
