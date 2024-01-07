@@ -12,7 +12,7 @@ export class AI extends Player {
     }
 
     override attack(
-        options: AttackOptions
+        options: Pick<AttackOptions, "receiver">
     ):
         | WrongCoordsError
         | AttackReceiverError
