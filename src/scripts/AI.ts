@@ -1,8 +1,4 @@
-import {
-    type WrongCoordsError,
-    type AttackReceiverError,
-    type AlreadyAttackedSpotError,
-} from "../errors";
+import { type AttackReceiverError } from "../errors";
 import { type AttackOptions } from "../types";
 import { Player } from "./Player";
 
@@ -13,9 +9,7 @@ export class AI extends Player {
 
     override attack(
         options: Pick<AttackOptions, "receiver">
-    ):
-        | WrongCoordsError
-        | AttackReceiverError
-        | AlreadyAttackedSpotError
-        | undefined {}
+    ): AttackReceiverError | undefined {
+        
+    }
 }
