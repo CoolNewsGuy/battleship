@@ -1,4 +1,4 @@
-import { AttackReceiverError } from "../errors";
+import { AttackReceiverError, GameoverError } from "../errors";
 import { type AttackOptions } from "../types";
 import { Player } from "./Player";
 
@@ -9,11 +9,15 @@ export class AI extends Player {
 
     override attack(
         options: Pick<AttackOptions, "receiver">
-    ): AttackReceiverError | undefined {
+    ): AttackReceiverError | GameoverError | undefined {
         const { receiver } = options;
 
         if (receiver === this) {
             return new AttackReceiverError();
+        }
+
+        if (receiver.board.areAllShipsSunk()) {
+            return new GameoverError();
         }
     }
 }
