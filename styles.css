@@ -36,3 +36,9 @@
     --players-info-form-start-button-text-shadow-hover: 0 0 4px #7c0cd3;
     --players-info-form-start-button-border: 3px solid #ffa500;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
