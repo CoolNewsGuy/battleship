@@ -1,0 +1,38 @@
+:root {
+    /* * Page */
+    --page-background: #58ff87;
+
+    /* * Form */
+    --players-info-form-background: #9f25ff;
+    --players-info-form-border-radius: 10px;
+    --players-info-form-border: 3px solid #caa1ff;
+    --players-info-form-width: 349px;
+    --players-info-form-height: 433px;
+
+    /* * Form's Player One and Player Two's labels */
+    --players-info-form-names-labels-font-size: 36px;
+    --players-info-form-labels-color: #ffc65f;
+    --players-info-form-labels-text-shadow: 0 0 6px #ffc65f;
+
+    /* * Form's names' inputs */
+    --players-info-form-inputs-background: #ffc65f;
+    --players-info-form-inputs-border: 3px solid #ffa500;
+    --players-info-form-inputs-color: #006acb;
+
+    /* * Form's AI and Human radio buttons */
+    --players-info-form-radio-width: 25px;
+    --players-info-form-radio-height: 25px;
+    /* Hover */
+    --players-info-form-radio-hover-background: #ffc65f;
+
+    /* * Form's Start Button */
+    --players-info-form-start-button-text-color: #ffc65f;
+    --players-info-form-start-button-background: #7c0cd3;
+    --players-info-form-start-button-border: 3px solid #caa1ff;
+    --players-info-form-start-button-text-shadow: 0 0 6px #ffc65f;
+    /* Hover */
+    --players-info-form-labels-background-hover: 0 0 6px #ffc65f;
+    --players-info-form-start-button-text-color-hover: #7c0cd3;
+    --players-info-form-start-button-text-shadow-hover: 0 0 4px #7c0cd3;
+    --players-info-form-start-button-border: 3px solid #ffa500;
+}
