@@ -50,3 +50,11 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+form {
+    background: var(--players-info-form-background);
+    width: var(--players-info-form-width);
+    height: var(--players-info-form-height);
+    border-radius: var(--players-info-form-border-radius);
+    border: var(--players-info-form-border);
+}
