@@ -61,4 +61,85 @@ form {
     height: var(--players-info-form-height);
     border-radius: var(--players-info-form-border-radius);
     border: var(--players-info-form-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px 8px;
+}
+
+form div.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form div.player-one-info {
+    gap: 15px;
+}
+
+form label {
+    color: var(--players-info-form-labels-color);
+    text-shadow: var(--players-info-form-labels-text-shadow);
+}
+
+form label.player-name + input {
+    background: var(--players-info-form-inputs-background);
+    border: var(--players-info-form-inputs-border);
+    color: var(--players-info-form-inputs-color);
+    width: 97%;
+    font-size: var(--players-info-form-inputs-font-size);
+    padding: 0px 12px;
+}
+
+form label.player-name {
+    font-size: var(--players-info-form-names-labels-font-size);
+}
+
+form div.player-two-info label:first-child {
+    margin-bottom: 15px;
+}
+
+form .player-two-types-container {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+form .player-two-types-container input {
+    width: var(--players-info-form-radio-width);
+    height: var(--players-info-form-radio-height);
+}
+
+form .player-two-types-container label {
+    font-size: var(--players-info-form-radio-labels-font-size);
+}
+
+form .player-two-types-container input {
+    position: relative;
+    top: 3px;
+}
+
+form .player-two-types-container div {
+    display: flex;
+    gap: 3px;
+}
+
+form button {
+    background: var(--players-info-form-start-button-background);
+    color: var(--players-info-form-start-button-text-color);
+    border: var(--players-info-form-start-button-border);
+    text-shadow: var(--players-info-form-start-button-text-shadow);
+    font-size: var(--players-info-form-start-button-font-size);
+    cursor: pointer;
+    width: 180px;
+    transition: all 0.2s;
+}
+
+form button:hover {
+    background: var(--players-info-form-start-button-background-hover);
+    color: var(--players-info-form-start-button-text-color-hover);
+    border: var(--players-info-form-start-button-border-hover);
+    text-shadow: var(--players-info-form-start-button-text-shadow-hover);
 }
