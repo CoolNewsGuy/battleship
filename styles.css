@@ -18,10 +18,12 @@
     --players-info-form-inputs-background: #ffc65f;
     --players-info-form-inputs-border: 3px solid #ffa500;
     --players-info-form-inputs-color: #006acb;
+    --players-info-form-inputs-font-size: 24px;
 
     /* * Form's AI and Human radio buttons */
     --players-info-form-radio-width: 25px;
     --players-info-form-radio-height: 25px;
+    --players-info-form-radio-labels-font-size: 28px;
     /* Hover */
     --players-info-form-radio-hover-background: #ffc65f;
 
