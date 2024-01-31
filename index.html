@@ -12,7 +12,28 @@
 </head>
 
 <body>
-    <form></form>
+    <form>
+        <div class="player-one-info player-info">
+            <label for="player-one-name" class="player-name">Player One's Name:</label>
+            <input type="text" name="player-one-name" id="player-one-name">
+        </div>
+
+        <div class="player-two-info player-info">
+            <label for="player-two-name" class="player-name">Player Two's Name:</label>
+            <input type="text" name="player-two-name" id="player-two-name">
+            <div class="player-two-types-container">
+                <div class="ai-type-container">
+                    <input type="radio" name="player-two-type" value="ai" id="ai"><label for="ai">AI</label>
+                </div>
+
+                <div class="human-type-container">
+                    <input type="radio" name="player-two-type" value="human" id="human"><label for="human">Human</label>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit">START</button>
+    </form>
 </body>
 
 </html>
