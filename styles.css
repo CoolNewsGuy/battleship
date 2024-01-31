@@ -32,8 +32,9 @@
     --players-info-form-start-button-background: #7c0cd3;
     --players-info-form-start-button-border: 3px solid #caa1ff;
     --players-info-form-start-button-text-shadow: 0 0 6px #ffc65f;
+    --players-info-form-start-button-font-size: 40px;
     /* Hover */
-    --players-info-form-labels-background-hover: 0 0 6px #ffc65f;
+    --players-info-form-start-button-background-hover: #ffc65f;
     --players-info-form-start-button-text-color-hover: #7c0cd3;
     --players-info-form-start-button-text-shadow-hover: 0 0 4px #7c0cd3;
     --players-info-form-start-button-border-hover: 3px solid #ffa500;
