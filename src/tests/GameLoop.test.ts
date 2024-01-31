@@ -1,4 +1,5 @@
 import { AI } from "../scripts/AI";
+import { GameLoop } from "../scripts/GameLoop";
 import { Player } from "../scripts/Player";
 
 describe("GameLoop class", () => {
