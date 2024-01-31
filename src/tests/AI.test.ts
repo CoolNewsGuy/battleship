@@ -14,7 +14,7 @@ describe("AI Class", () => {
 
     describe("overrided attack method", () => {
         it("returns an error if the receiver is an invalid target", () => {
-            const ai = new AI();
+            const ai = new AI("bar");
 
             expect(
                 ai.attack({
@@ -26,7 +26,7 @@ describe("AI Class", () => {
         });
 
         it("returns an error if all receiver's ships are sunk", () => {
-            const ai = new AI();
+            const ai = new AI("bar");
             const p = new Player("foo");
 
             expect(p.board.areAllShipsSunk()).toBe(true);
@@ -41,7 +41,7 @@ describe("AI Class", () => {
         });
 
         it("attacks a random spot", () => {
-            const ai = new AI();
+            const ai = new AI("bar");
             const p = new Player("foo");
             const ship = new Ship(2);
 
