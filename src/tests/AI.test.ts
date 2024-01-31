@@ -6,10 +6,10 @@ import { Ship } from "../scripts/Ship";
 import { Spot, type SpotWithShip } from "../types";
 
 describe("AI Class", () => {
-    it("has its 'name' prop === 'AI' by default", () => {
-        const ai = new AI();
+    it("has 'name' property", () => {
+        const ai = new AI("bar");
 
-        expect(ai.name).toBe("AI");
+        expect(ai.name).toBe("bar");
     });
 
     describe("overrided attack method", () => {
