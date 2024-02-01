@@ -40,11 +40,13 @@
     --players-info-form-start-button-border-hover: 3px solid #ffa500;
 
     /* * Gameboard's lost ships container */
-    --gameboard-lost-ships-background: #9f25ff;
-    --gameboard-lost-ships-border: 3px solid #caa1ff;
-    --gameboard-lost-ships-text-color: #ffc65f;
-    --gameboard-lost-ships-text-shadow: 0 0 6px #ffc65f;
-    --gameboard-lost-ships-font-size: 25px;
+    --gameboard-lost-ships-container-background: #9f25ff;
+    --gameboard-lost-ships-container-border: 3px solid #caa1ff;
+    --gameboard-lost-ships-container-text-color: #ffc65f;
+    --gameboard-lost-ships-container-text-shadow: 0 0 6px #ffc65f;
+    --gameboard-lost-ships-container-font-size: 25px;
+    --gameboard-lost-ships-container-width: 336px;
+    --gameboard-lost-ships-container-height: 72px;
 
     /* * Gameboard's grid */
     --gameboard-grid-square-side-length: 56px;
@@ -58,22 +60,26 @@
     --normal-ship-box-shadow: inset 0 0 0px 2px #fac565;
     --normal-ship-square-background: #ffa500;
     --normal-ship-square-box-shadow: inset 0 0 0px 1px #fac565;
+    --normal-ship-square-border: 1px solid #fac565;
 
     /* * Selected Ship */
     --selected-ship-box-shadow: inset 0 0 0px 2px #27d8ff;
     --selected-ship-square-background: #10a9ff;
     --selected-ship-square-box-shadow: inset 0 0 0px 1px #27d8ff;
+    --selected-ship-square-border: 1px solid #27d8ff;
 
     /* * Damaged Ship */
     --damaged-ship-box-shadow: inset 0 0 0px 2px #ff8484;
     --damaged-ship-square-background: #ff3f3f;
     --damaged-ship-square-box-shadow: inset 0 0 0px 1px #ff8484;
+    --damaged-ship-square-border: 1px solid #ff8484;
 
     /* * Player's name's container */
     --player-name-container-background: #9f25ff;
     --player-name-container-border: 3px solid #caa1ff;
-    --player-name-text-color: #ffc65f;
-    --player-name-font-size: 45px;
+    --player-name-container-text-color: #ffc65f;
+    --player-name-container-font-size: 45px;
+    --player-name-container-text-shadow: 0 0 6px #ffc65f;
 }
 
 * {
