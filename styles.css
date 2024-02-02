@@ -185,3 +185,136 @@ form button:hover {
     border: var(--players-info-form-start-button-border-hover);
     text-shadow: var(--players-info-form-start-button-text-shadow-hover);
 }
+
+/* * Gameboard */
+.gameboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gameboard .lost-ships-container,
+.gameboard .player-name-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 28px;
+}
+
+.gameboard .lost-ships-container {
+    font-size: var(--gameboard-lost-ships-container-font-size);
+    width: var(--gameboard-lost-ships-container-width);
+    height: var(--gameboard-lost-ships-container-height);
+    background: var(--gameboard-lost-ships-container-background);
+    color: var(--gameboard-lost-ships-container-text-color);
+    text-shadow: var(--gameboard-lost-ships-container-text-shadow);
+    border: var(--gameboard-lost-ships-container-border);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.gameboard .grid {
+    font-size: var(--gameboard-grid-text-size);
+}
+
+.gameboard .row {
+    display: flex;
+}
+
+.gameboard .row-number,
+.gameboard .column-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameboard .square {
+    width: var(--gameboard-grid-square-side-length);
+    height: var(--gameboard-grid-square-side-length);
+}
+
+.gameboard .playing-square {
+    background: #fff;
+    box-shadow: inset 0 0 0 1px #000;
+}
+
+.gameboard .playing-square:last-child {
+    border-right: 1px solid;
+}
+
+.gameboard .playing-square:nth-child(2) {
+    border-left: 1px solid;
+}
+
+.gameboard .row:nth-child(2) *:not(:first-child) {
+    border-top: 1px solid;
+}
+
+.gameboard .row:last-child *:not(:first-child) {
+    border-bottom: 1px solid;
+}
+
+.gameboard .player-name-container {
+    background: var(--player-name-container-background);
+    color: var(--player-name-container-text-color);
+    font-size: var(--player-name-container-font-size);
+    border: var(--player-name-container-border);
+    position: relative;
+    top: -3px;
+    width: var(--gameboard-lost-ships-container-width);
+    height: var(--gameboard-lost-ships-container-height);
+    text-shadow: var(--player-name-container-text-shadow);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.ship {
+    display: flex;
+}
+
+.normal-ship .square {
+    background: var(--normal-ship-square-background);
+    box-shadow: var(--normal-ship-square-box-shadow);
+    border-top: var(--normal-ship-square-border);
+    border-bottom: var(--normal-ship-square-border);
+}
+
+.normal-ship .square:last-child {
+    border-right: var(--normal-ship-square-border);
+}
+
+.normal-ship .square:first-child {
+    border-left: var(--normal-ship-square-border);
+}
+
+.selected-ship .square {
+    background: var(--selected-ship-square-background);
+    box-shadow: var(--selected-ship-square-box-shadow);
+    border-top: var(--selected-ship-square-border);
+    border-bottom: var(--selected-ship-square-border);
+}
+
+.selected-ship .square:last-child {
+    border-right: var(--selected-ship-square-border);
+}
+
+.selected-ship .square:first-child {
+    border-left: var(--selected-ship-square-border);
+}
+
+.damaged-ship .square {
+    background: var(--damaged-ship-square-background);
+    box-shadow: var(--damaged-ship-square-box-shadow);
+    border-top: var(--damaged-ship-square-border);
+    border-bottom: var(--damaged-ship-square-border);
+}
+
+.damaged-ship .square:last-child {
+    border-right: var(--damaged-ship-square-border);
+}
+
+.damaged-ship .square:first-child {
+    border-left: var(--damaged-ship-square-border);
+}
