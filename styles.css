@@ -194,6 +194,7 @@ form button:hover {
 }
 
 .gameboard .lost-ships-container,
+.gameboard .ships-container,
 .gameboard .player-name-container {
     display: flex;
     flex-direction: column;
@@ -203,7 +204,8 @@ form button:hover {
     left: 28px;
 }
 
-.gameboard .lost-ships-container {
+.gameboard .lost-ships-container,
+.gameboard .ships-container {
     font-size: var(--gameboard-lost-ships-container-font-size);
     width: var(--gameboard-lost-ships-container-width);
     height: var(--gameboard-lost-ships-container-height);
