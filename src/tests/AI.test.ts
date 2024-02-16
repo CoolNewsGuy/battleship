@@ -1,6 +1,6 @@
 import { AttackReceiverError, GameoverError } from "../errors";
 import { AI } from "../scripts/AI";
-import { Gameboard } from "../scripts/Gameboard/Gameboard";
+import { GameboardModel } from "../scripts/Gameboard/GameboardModel";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
 import { Spot, type SpotWithShip } from "../types";
@@ -22,7 +22,7 @@ describe("AI Class", () => {
                 })
             ).toBeInstanceOf(AttackReceiverError);
 
-            expect(ai.board.grid).toStrictEqual(new Gameboard().grid);
+            expect(ai.board.grid).toStrictEqual(new GameboardModel().grid);
         });
 
         it("returns an error if all receiver's ships are sunk", () => {
@@ -37,7 +37,7 @@ describe("AI Class", () => {
                 })
             ).toBeInstanceOf(GameoverError);
 
-            expect(p.board.grid).toStrictEqual(new Gameboard().grid);
+            expect(p.board.grid).toStrictEqual(new GameboardModel().grid);
         });
 
         it("attacks a random spot", () => {

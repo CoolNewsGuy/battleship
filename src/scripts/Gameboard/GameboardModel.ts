@@ -13,7 +13,7 @@ import {
 } from "../../types";
 import { type Ship } from "../Ship";
 
-export class Gameboard {
+export class GameboardModel {
     readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;
     readonly #placedShips: Ship[];
 

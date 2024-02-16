@@ -4,15 +4,15 @@ import {
     type GameoverError,
 } from "../errors";
 import { type AttackOptions } from "../types";
-import { Gameboard } from "./Gameboard/Gameboard";
+import { GameboardModel } from "./Gameboard/GameboardModel";
 
 export class Player {
     readonly name: string;
-    readonly board: Gameboard;
+    readonly board: GameboardModel;
 
     constructor(name: string) {
         this.name = name;
-        this.board = new Gameboard();
+        this.board = new GameboardModel();
     }
 
     attack(

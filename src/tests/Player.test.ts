@@ -3,7 +3,7 @@ import {
     AlreadyAttackedSpotError,
     GameoverError,
 } from "../errors";
-import { Gameboard } from "../scripts/Gameboard/Gameboard";
+import { GameboardModel } from "../scripts/Gameboard/GameboardModel";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
 import { Spot, type SpotWithShip } from "../types";
@@ -13,7 +13,7 @@ describe("Player class", () => {
         const p = new Player("John");
 
         expect(p.name).toBe("John");
-        expect(p.board).toStrictEqual(new Gameboard());
+        expect(p.board).toStrictEqual(new GameboardModel());
     });
 
     describe("attack method", () => {

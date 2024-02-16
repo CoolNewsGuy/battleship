@@ -5,19 +5,19 @@ import {
     NotEnoughSpotsError,
     GameoverError,
 } from "../errors";
-import { Gameboard } from "../scripts/Gameboard/Gameboard";
+import { GameboardModel } from "../scripts/Gameboard/GameboardModel";
 import { Ship } from "../scripts/Ship";
 import { type NumFrom0To9, Spot, type SpotWithShip } from "../types";
 
 describe("Gameboard Class", () => {
     it("has no pub props", () => {
-        const board = new Gameboard();
+        const board = new GameboardModel();
 
         expect(Object.keys(board)).toHaveLength(0);
     });
 
     it("has a getter for a private prop 'grid' of 10x10 matrix value", () => {
-        const board = new Gameboard();
+        const board = new GameboardModel();
 
         expect(board.grid).toHaveLength(10);
 
@@ -28,7 +28,7 @@ describe("Gameboard Class", () => {
 
     describe("placeShip method", () => {
         it("returns an error if number of horizontal spots is NOT enough for a ship", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(3), new Ship(4), new Ship(5)];
             const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 9],
@@ -61,7 +61,7 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if number of vertical spots is NOT enough for a ship", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(3), new Ship(4), new Ship(5)];
             const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 9],
@@ -94,7 +94,7 @@ describe("Gameboard Class", () => {
         });
 
         it("places ships horizontally properly", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [
                 new Ship(2),
                 new Ship(2),
@@ -132,7 +132,7 @@ describe("Gameboard Class", () => {
         });
 
         it("places ships vertically properly", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [
                 new Ship(2),
                 new Ship(2),
@@ -170,7 +170,7 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if the ship collapses with another one", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(2), new Ship(3), new Ship(4), new Ship(5)];
             const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [1, 5],
@@ -251,7 +251,7 @@ describe("Gameboard Class", () => {
         });
 
         it("stores newly placed ships in an array", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(2), new Ship(3), new Ship(4)];
             const coordsPairs: Array<[NumFrom0To9, NumFrom0To9]> = [
                 [0, 3],
@@ -272,7 +272,7 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if Ship is already placed", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(3), new Ship(3)];
 
             expect(
@@ -317,8 +317,8 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if a ship is in another board", () => {
-            const b1 = new Gameboard();
-            const b2 = new Gameboard();
+            const b1 = new GameboardModel();
+            const b2 = new GameboardModel();
             const ship = new Ship(3);
 
             expect(
@@ -352,7 +352,7 @@ describe("Gameboard Class", () => {
 
     describe("receiveAttack method", () => {
         it("marks an empty spot as missed", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
 
             board.placeShip({
                 ship: new Ship(2),
@@ -371,7 +371,7 @@ describe("Gameboard Class", () => {
         });
 
         it("marks a taken spot as damaged", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(3), new Ship(5)];
 
             board.placeShip({
@@ -429,7 +429,7 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if a spot is already damaged or missed", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ship = new Ship(3);
 
             board.placeShip({
@@ -473,7 +473,7 @@ describe("Gameboard Class", () => {
         });
 
         it("increases ship's receivedHits", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ship = new Ship(3);
 
             board.placeShip({
@@ -499,7 +499,7 @@ describe("Gameboard Class", () => {
         });
 
         it("returns an error if all ships are already sunk", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(2), new Ship(3)];
 
             board.placeShip({
@@ -541,7 +541,7 @@ describe("Gameboard Class", () => {
 
     describe("areAllShipsSunk method", () => {
         it("returns true if all ships are sunk", () => {
-            const board = new Gameboard();
+            const board = new GameboardModel();
             const ships = [new Ship(2), new Ship(3)];
 
             board.placeShip({
