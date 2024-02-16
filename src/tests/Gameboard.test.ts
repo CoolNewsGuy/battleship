@@ -5,7 +5,7 @@ import {
     NotEnoughSpotsError,
     GameoverError,
 } from "../errors";
-import { Gameboard } from "../scripts/Gameboard";
+import { Gameboard } from "../scripts/Gameboard/Gameboard";
 import { Ship } from "../scripts/Ship";
 import { type NumFrom0To9, Spot, type SpotWithShip } from "../types";
 

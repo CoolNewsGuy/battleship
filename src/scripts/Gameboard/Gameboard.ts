@@ -4,14 +4,14 @@ import {
     CollapseError,
     NotEnoughSpotsError,
     GameoverError,
-} from "../errors";
+} from "../../errors";
 import {
     Spot,
     type MatrixOf10x10,
     type PlacingOptions,
     type SpotWithShip,
-} from "../types";
-import { type Ship } from "./Ship";
+} from "../../types";
+import { type Ship } from "../Ship";
 
 export class Gameboard {
     readonly #grid: MatrixOf10x10<Spot | SpotWithShip>;

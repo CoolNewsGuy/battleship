@@ -3,7 +3,7 @@ import {
     AlreadyAttackedSpotError,
     GameoverError,
 } from "../errors";
-import { Gameboard } from "../scripts/Gameboard";
+import { Gameboard } from "../scripts/Gameboard/Gameboard";
 import { Player } from "../scripts/Player";
 import { Ship } from "../scripts/Ship";
 import { Spot, type SpotWithShip } from "../types";

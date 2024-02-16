@@ -4,7 +4,7 @@ import {
     type GameoverError,
 } from "../errors";
 import { type AttackOptions } from "../types";
-import { Gameboard } from "./Gameboard";
+import { Gameboard } from "./Gameboard/Gameboard";
 
 export class Player {
     readonly name: string;
