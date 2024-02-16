@@ -6,9 +6,7 @@ export class GameboardView {
     constructor() {
         this.gameboardElement = document.createElement("div");
         this.gameboardElement.className = HTMLClass.Gameboard;
-    }
 
-    init(): void {
         this.renderTo(document.body);
     }
 
