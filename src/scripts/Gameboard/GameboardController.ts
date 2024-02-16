@@ -1,6 +1,6 @@
 import { type MatrixOf10x10, type Spot, type SpotWithShip } from "../../types";
 import { type Ship } from "../Ship";
-import { type GameboardModel } from "./Gameboard";
+import { type GameboardModel } from "./GameboardModel";
 import { type GameboardView } from "./GameboardView";
 
 export class GameboardController {
