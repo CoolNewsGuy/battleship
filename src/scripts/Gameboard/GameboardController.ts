@@ -19,4 +19,8 @@ export class GameboardController {
     get placedShips(): readonly Ship[] {
         return this.gameboardModel.placedShips;
     }
+
+    renderTo(element: HTMLElement): void {
+        this.gameboardView.renderTo(element, this.grid, this.placedShips);
+    }
 }
