@@ -16,7 +16,6 @@ export const enum HTMLClass {
     Row = "row",
     EmptySquare = "empty-square",
     ColumnNumber = "column-number",
-    NormalRow = "normal-row",
     RowLetter = "row-letter",
     PlayingSquare = "playing-square",
 
