@@ -291,6 +291,21 @@ form button:hover {
     border-left: var(--normal-ship-square-border);
 }
 
+.normal-ship .damaged-square {
+    background: var(--damaged-ship-square-background);
+    box-shadow: var(--damaged-ship-square-box-shadow);
+    border-top: var(--damaged-ship-square-border);
+    border-bottom: var(--damaged-ship-square-border);
+}
+
+.normal-ship .damaged-square:last-child {
+    border-right: var(--damaged-ship-square-border);
+}
+
+.normal-ship .damaged-square:first-child {
+    border-left: var(--damaged-ship-square-border);
+}
+
 .selected-ship .square {
     background: var(--selected-ship-square-background);
     box-shadow: var(--selected-ship-square-box-shadow);
@@ -304,19 +319,4 @@ form button:hover {
 
 .selected-ship .square:first-child {
     border-left: var(--selected-ship-square-border);
-}
-
-.damaged-ship .square {
-    background: var(--damaged-ship-square-background);
-    box-shadow: var(--damaged-ship-square-box-shadow);
-    border-top: var(--damaged-ship-square-border);
-    border-bottom: var(--damaged-ship-square-border);
-}
-
-.damaged-ship .square:last-child {
-    border-right: var(--damaged-ship-square-border);
-}
-
-.damaged-ship .square:first-child {
-    border-left: var(--damaged-ship-square-border);
 }
