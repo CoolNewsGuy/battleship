@@ -225,8 +225,8 @@ form button:hover {
     display: flex;
 }
 
-.gameboard .row-number,
-.gameboard .column-letter {
+.gameboard .column-number,
+.gameboard .row-letter {
     display: flex;
     align-items: center;
     justify-content: center;
