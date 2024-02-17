@@ -43,6 +43,22 @@ export class GameboardView {
 
         shipsContainerDiv.className = HTMLClass.ShipsContainer;
 
+        const shipDiv = document.createElement("div");
+
+        shipDiv.classList.add(HTMLClass.Ship, HTMLClass.NormalShip);
+        shipsContainerDiv.appendChild(shipDiv);
+
+        const ship = this.shipsToPlace.pop();
+
+        if (ship != null) {
+            for (let _ = 0; _ < ship.shipLength; _++) {
+                const squareDiv = document.createElement("div");
+
+                squareDiv.className = HTMLClass.Square;
+                shipDiv.appendChild(squareDiv);
+            }
+        }
+
         const gridDiv = document.createElement("div");
 
         gridDiv.className = HTMLClass.Grid;
