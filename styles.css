@@ -219,6 +219,7 @@ form button:hover {
 
 .gameboard .grid {
     font-size: var(--gameboard-grid-text-size);
+    position: relative;
 }
 
 .gameboard .row {
