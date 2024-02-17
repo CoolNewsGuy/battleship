@@ -1,13 +1,21 @@
 import { HTMLClass, type RowLetter } from "../../DOMTypes";
 import { type MatrixOf10x10, type Spot, type SpotWithShip } from "../../types";
-import { type Ship } from "../Ship";
+import { Ship } from "../Ship";
 
 export class GameboardView {
     private readonly gameboardElement: HTMLDivElement;
+    private readonly shipsToPlace: Ship[];
 
     constructor() {
         this.gameboardElement = document.createElement("div");
         this.gameboardElement.className = HTMLClass.Gameboard;
+        this.shipsToPlace = [
+            new Ship(5),
+            new Ship(4),
+            new Ship(3),
+            new Ship(2),
+            new Ship(2),
+        ];
     }
 
     renderTo(
