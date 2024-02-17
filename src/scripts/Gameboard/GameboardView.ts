@@ -59,6 +59,18 @@ export class GameboardView {
             }
         }
 
+        shipsContainerDiv.onclick = (e) => {
+            const clickedElement = e.target;
+
+            if (
+                clickedElement instanceof HTMLDivElement &&
+                clickedElement.closest(`.${HTMLClass.Ship}`) != null
+            ) {
+                shipDiv.classList.toggle(HTMLClass.NormalShip);
+                shipDiv.classList.toggle(HTMLClass.SelectedShip);
+            }
+        };
+
         const gridDiv = document.createElement("div");
 
         gridDiv.className = HTMLClass.Grid;
