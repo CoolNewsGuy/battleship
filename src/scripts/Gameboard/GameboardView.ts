@@ -75,6 +75,57 @@ export class GameboardView {
 
         gridDiv.className = HTMLClass.Grid;
 
+        gridDiv.onpointerover = (e) => {
+            const selectedShip = document.querySelector<HTMLDivElement>(
+                `.${HTMLClass.SelectedShip}`
+            );
+
+            if (selectedShip != null) {
+                const hoveredElement = e.target;
+
+                if (
+                    hoveredElement instanceof HTMLDivElement &&
+                    hoveredElement.classList.contains(HTMLClass.PlayingSquare)
+                ) {
+                    const squaresToPlaceShipOn = [hoveredElement];
+                    const shipLength = selectedShip.childElementCount;
+
+                    for (let i = 0; i < shipLength - 1; i++) {
+                        const nextSquare = squaresToPlaceShipOn[i].nextSibling;
+
+                        if (nextSquare != null) {
+                            squaresToPlaceShipOn.push(
+                                nextSquare as HTMLDivElement
+                            );
+                        }
+                    }
+
+                    for (const square of squaresToPlaceShipOn) {
+                        square.style.backgroundColor =
+                            squaresToPlaceShipOn.length === shipLength
+                                ? "var(--gameboard-grid-squares-to-place-ship-on-background)"
+                                : "var(--gameboard-grid-squares-not-to-place-ship-on-background)";
+                    }
+
+                    hoveredElement.onpointerleave = () => {
+                        for (const square of squaresToPlaceShipOn) {
+                            square.style.backgroundColor = "";
+                        }
+                    };
+
+                    hoveredElement.onclick = () => {
+                        if (squaresToPlaceShipOn.length === shipLength) {
+                            gridDiv.appendChild(selectedShip);
+
+                            selectedShip.style.position = "absolute";
+                            selectedShip.style.left = `${hoveredElement.offsetLeft}px`;
+                            selectedShip.style.top = `${hoveredElement.offsetTop}px`;
+                        }
+                    };
+                }
+            }
+        };
+
         for (let i = 0; i < 11; i++) {
             const rowDiv = document.createElement("div");
 
