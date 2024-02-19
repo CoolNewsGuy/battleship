@@ -91,7 +91,33 @@ export class GameboardView {
                     const shipLength = selectedShip.childElementCount;
 
                     for (let i = 0; i < shipLength - 1; i++) {
-                        const nextSquare = squaresToPlaceShipOn[i].nextSibling;
+                        let nextSquare;
+
+                        if (
+                            selectedShip.classList.contains(
+                                HTMLClass.VerticalShip
+                            )
+                        ) {
+                            const currentSquareRow = squaresToPlaceShipOn[
+                                i
+                            ].closest<HTMLDivElement>(`.${HTMLClass.Row}`);
+
+                            currentSquareRow
+                                ?.querySelectorAll<HTMLDivElement>(
+                                    `.${HTMLClass.PlayingSquare}`
+                                )
+                                .forEach((square, i) => {
+                                    if (square === hoveredElement) {
+                                        nextSquare = (
+                                            currentSquareRow?.nextSibling as HTMLDivElement
+                                        ).querySelectorAll<HTMLDivElement>(
+                                            `.${HTMLClass.PlayingSquare}`
+                                        )[i];
+                                    }
+                                });
+                        } else {
+                            nextSquare = squaresToPlaceShipOn[i].nextSibling;
+                        }
 
                         if (nextSquare != null) {
                             squaresToPlaceShipOn.push(
@@ -122,6 +148,24 @@ export class GameboardView {
                             selectedShip.style.top = `${hoveredElement.offsetTop}px`;
                         }
                     };
+                }
+            }
+        };
+
+        gridDiv.onauxclick = (e) => {
+            const clickedElement = e.target;
+
+            if (
+                e.button === 1 &&
+                clickedElement instanceof HTMLDivElement &&
+                clickedElement.closest(`.${HTMLClass.Ship}`) != null
+            ) {
+                const ship = clickedElement.closest<HTMLDivElement>(
+                    `.${HTMLClass.Ship}`
+                );
+
+                if (ship != null) {
+                    ship.classList.toggle(HTMLClass.VerticalShip);
                 }
             }
         };
