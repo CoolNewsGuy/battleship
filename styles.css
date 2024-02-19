@@ -277,6 +277,10 @@ form button:hover {
     display: flex;
 }
 
+.vertical-ship {
+    flex-direction: column;
+}
+
 .normal-ship .square {
     background: var(--normal-ship-square-background);
     box-shadow: var(--normal-ship-square-box-shadow);

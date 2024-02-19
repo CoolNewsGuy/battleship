@@ -18,6 +18,7 @@ export const enum HTMLClass {
 
     ShipsContainer = "ships-container",
     Ship = "ship",
+    VerticalShip = "vertical-ship",
     NormalShip = "normal-ship",
     SelectedShip = "selected-ship",
     DamagedShip = "damaged-ship",
