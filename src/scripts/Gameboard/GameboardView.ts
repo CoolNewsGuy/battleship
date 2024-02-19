@@ -23,6 +23,24 @@ export class GameboardView {
         grid: MatrixOf10x10<Spot | SpotWithShip>,
         placedShips: readonly Ship[]
     ): void {
+        const lostShipsContainerDiv =
+            this.createLostShipsContainer(placedShips);
+        const shipsContainerDiv = this.createShipsContainer();
+        const gridDiv = this.createGrid();
+        const PlayerNameContainerDiv = this.createPlayerNameContainer();
+
+        this.gameboardElement.append(
+            lostShipsContainerDiv,
+            shipsContainerDiv,
+            gridDiv,
+            PlayerNameContainerDiv
+        );
+        element.appendChild(this.gameboardElement);
+    }
+
+    private createLostShipsContainer(
+        placedShips: readonly Ship[]
+    ): HTMLDivElement {
         const lostShipsContainerDiv = document.createElement("div");
         const lostShipsLengthsDiv = document.createElement("div");
 
@@ -39,6 +57,10 @@ export class GameboardView {
         </p>
         `;
 
+        return lostShipsContainerDiv;
+    }
+
+    private createShipsContainer(): HTMLDivElement {
         const shipsContainerDiv = document.createElement("div");
 
         shipsContainerDiv.className = HTMLClass.ShipsContainer;
@@ -71,6 +93,10 @@ export class GameboardView {
             }
         };
 
+        return shipsContainerDiv;
+    }
+
+    private createGrid(): HTMLDivElement {
         const gridDiv = document.createElement("div");
 
         gridDiv.className = HTMLClass.Grid;
@@ -226,6 +252,10 @@ export class GameboardView {
             gridDiv.appendChild(rowDiv);
         }
 
+        return gridDiv;
+    }
+
+    private createPlayerNameContainer(): HTMLDivElement {
         const PlayerNameContainerDiv = document.createElement("div");
         const PlayerNameSpan = document.createElement("span");
 
@@ -234,13 +264,6 @@ export class GameboardView {
 
         PlayerNameContainerDiv.appendChild(PlayerNameSpan);
 
-        this.gameboardElement.append(
-            lostShipsContainerDiv,
-            shipsContainerDiv,
-            gridDiv,
-            PlayerNameContainerDiv
-        );
-
-        element.appendChild(this.gameboardElement);
+        return PlayerNameContainerDiv;
     }
 }
