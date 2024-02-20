@@ -170,6 +170,14 @@ export class GameboardView {
                     squaresToPlaceShipOn.length ===
                     selectedShip.childElementCount
                 ) {
+                    if (gridDiv.contains(selectedShip)) {
+                        selectedShip.style.position = "absolute";
+                        selectedShip.style.left = `${squaresToPlaceShipOn[0].offsetLeft}px`;
+                        selectedShip.style.top = `${squaresToPlaceShipOn[0].offsetTop}px`;
+
+                        return;
+                    }
+
                     gridDiv.appendChild(selectedShip);
 
                     selectedShip.style.position = "absolute";
