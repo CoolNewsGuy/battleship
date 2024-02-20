@@ -191,7 +191,43 @@ export class GameboardView {
                 );
 
                 if (ship != null) {
-                    ship.classList.toggle(HTMLClass.VerticalShip);
+                    ship.style.visibility = "hidden";
+                    const startingSquare = document.elementFromPoint(
+                        ship.getBoundingClientRect().x,
+                        ship.getBoundingClientRect().y
+                    );
+                    ship.style.visibility = "visible";
+
+                    const playingSquares =
+                        document.querySelectorAll<HTMLDivElement>(
+                            `.${HTMLClass.PlayingSquare}`
+                        );
+                    const newSquares = [startingSquare];
+                    const shipLength = ship.childElementCount;
+
+                    // If ship is in vertical position, change it to horizontal
+                    if (ship.classList.contains(HTMLClass.VerticalShip)) {
+                        for (let i = 0; i < shipLength - 1; i++) {
+                            newSquares.push(
+                                newSquares[i]?.nextSibling as HTMLDivElement
+                            );
+                        }
+                    } else {
+                        playingSquares.forEach((square, i) => {
+                            if (square === startingSquare) {
+                                for (let j = 10; j < shipLength * 10; j += 10) {
+                                    newSquares.push(playingSquares[i + j]);
+                                }
+                            }
+                        });
+                    }
+
+                    if (
+                        shipLength ===
+                        newSquares.filter((square) => square).length
+                    ) {
+                        ship.classList.toggle(HTMLClass.VerticalShip);
+                    }
                 }
             }
         };
