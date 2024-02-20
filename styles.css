@@ -93,7 +93,7 @@ body {
     height: 100vh;
     background: var(--page-background);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
