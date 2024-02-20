@@ -82,15 +82,7 @@ export class GameboardView {
         }
 
         shipsContainerDiv.onclick = (e) => {
-            const clickedElement = e.target;
-
-            if (
-                clickedElement instanceof HTMLDivElement &&
-                clickedElement.closest(`.${HTMLClass.Ship}`) != null
-            ) {
-                shipDiv.classList.toggle(HTMLClass.NormalShip);
-                shipDiv.classList.toggle(HTMLClass.SelectedShip);
-            }
+            this.toggleShipSelection(e);
         };
 
         return shipsContainerDiv;
@@ -100,137 +92,6 @@ export class GameboardView {
         const gridDiv = document.createElement("div");
 
         gridDiv.className = HTMLClass.Grid;
-
-        gridDiv.onpointerover = (e) => {
-            const selectedShip = document.querySelector<HTMLDivElement>(
-                `.${HTMLClass.SelectedShip}`
-            );
-
-            if (selectedShip != null) {
-                const hoveredElement = e.target;
-
-                if (
-                    hoveredElement instanceof HTMLDivElement &&
-                    hoveredElement.classList.contains(HTMLClass.PlayingSquare)
-                ) {
-                    const squaresToPlaceShipOn = [hoveredElement];
-                    const shipLength = selectedShip.childElementCount;
-
-                    for (let i = 0; i < shipLength - 1; i++) {
-                        let nextSquare;
-
-                        if (
-                            selectedShip.classList.contains(
-                                HTMLClass.VerticalShip
-                            )
-                        ) {
-                            const currentSquareRow = squaresToPlaceShipOn[
-                                i
-                            ].closest<HTMLDivElement>(`.${HTMLClass.Row}`);
-
-                            currentSquareRow
-                                ?.querySelectorAll<HTMLDivElement>(
-                                    `.${HTMLClass.PlayingSquare}`
-                                )
-                                .forEach((square, i) => {
-                                    if (square === hoveredElement) {
-                                        nextSquare = (
-                                            currentSquareRow?.nextSibling as HTMLDivElement
-                                        ).querySelectorAll<HTMLDivElement>(
-                                            `.${HTMLClass.PlayingSquare}`
-                                        )[i];
-                                    }
-                                });
-                        } else {
-                            nextSquare = squaresToPlaceShipOn[i].nextSibling;
-                        }
-
-                        if (nextSquare != null) {
-                            squaresToPlaceShipOn.push(
-                                nextSquare as HTMLDivElement
-                            );
-                        }
-                    }
-
-                    for (const square of squaresToPlaceShipOn) {
-                        square.style.backgroundColor =
-                            squaresToPlaceShipOn.length === shipLength
-                                ? "var(--gameboard-grid-squares-to-place-ship-on-background)"
-                                : "var(--gameboard-grid-squares-not-to-place-ship-on-background)";
-                    }
-
-                    hoveredElement.onpointerleave = () => {
-                        for (const square of squaresToPlaceShipOn) {
-                            square.style.backgroundColor = "";
-                        }
-                    };
-
-                    hoveredElement.onclick = () => {
-                        if (squaresToPlaceShipOn.length === shipLength) {
-                            gridDiv.appendChild(selectedShip);
-
-                            selectedShip.style.position = "absolute";
-                            selectedShip.style.left = `${hoveredElement.offsetLeft}px`;
-                            selectedShip.style.top = `${hoveredElement.offsetTop}px`;
-                        }
-                    };
-                }
-            }
-        };
-
-        gridDiv.onauxclick = (e) => {
-            const clickedElement = e.target;
-
-            if (
-                e.button === 1 &&
-                clickedElement instanceof HTMLDivElement &&
-                clickedElement.closest(`.${HTMLClass.Ship}`) != null
-            ) {
-                const ship = clickedElement.closest<HTMLDivElement>(
-                    `.${HTMLClass.Ship}`
-                );
-
-                if (ship != null) {
-                    ship.style.visibility = "hidden";
-                    const startingSquare = document.elementFromPoint(
-                        ship.getBoundingClientRect().x,
-                        ship.getBoundingClientRect().y
-                    );
-                    ship.style.visibility = "visible";
-
-                    const playingSquares =
-                        document.querySelectorAll<HTMLDivElement>(
-                            `.${HTMLClass.PlayingSquare}`
-                        );
-                    const newSquares = [startingSquare];
-                    const shipLength = ship.childElementCount;
-
-                    // If ship is in vertical position, change it to horizontal
-                    if (ship.classList.contains(HTMLClass.VerticalShip)) {
-                        for (let i = 0; i < shipLength - 1; i++) {
-                            newSquares.push(
-                                newSquares[i]?.nextSibling as HTMLDivElement
-                            );
-                        }
-                    } else {
-                        playingSquares.forEach((square, i) => {
-                            if (square === startingSquare) {
-                                for (let j = 10; j < shipLength * 10; j += 10) {
-                                    newSquares.push(playingSquares[i + j]);
-                                }
-                            }
-                        });
-                    }
-
-                    if (
-                        shipLength ===
-                        newSquares.filter((square) => square).length
-                    ) {
-                        ship.classList.toggle(HTMLClass.VerticalShip);
-                    }
-                }
-            }
-        };
 
         for (let i = 0; i < 11; i++) {
             const rowDiv = document.createElement("div");
@@ -288,6 +149,40 @@ export class GameboardView {
             gridDiv.appendChild(rowDiv);
         }
 
+        gridDiv.onpointerover = (e) => {
+            const squaresToPlaceShipOn = this.selectSquaresToPlaceShipOn(e);
+            const selectedShip = document.querySelector<HTMLDivElement>(
+                `.${HTMLClass.SelectedShip}`
+            );
+
+            if (squaresToPlaceShipOn == null || selectedShip == null) {
+                return;
+            }
+
+            squaresToPlaceShipOn[0].onpointerleave = () => {
+                for (const square of squaresToPlaceShipOn) {
+                    square.style.backgroundColor = "";
+                }
+            };
+
+            squaresToPlaceShipOn[0].onclick = () => {
+                if (
+                    squaresToPlaceShipOn.length ===
+                    selectedShip.childElementCount
+                ) {
+                    gridDiv.appendChild(selectedShip);
+
+                    selectedShip.style.position = "absolute";
+                    selectedShip.style.left = `${squaresToPlaceShipOn[0].offsetLeft}px`;
+                    selectedShip.style.top = `${squaresToPlaceShipOn[0].offsetTop}px`;
+                }
+            };
+        };
+
+        gridDiv.onauxclick = (e) => {
+            this.changeShipDirection(e);
+        };
+
         return gridDiv;
     }
 
@@ -301,5 +196,136 @@ export class GameboardView {
         PlayerNameContainerDiv.appendChild(PlayerNameSpan);
 
         return PlayerNameContainerDiv;
+    }
+
+    // events
+    private toggleShipSelection(e: MouseEvent): void {
+        const clickedElement = e.target;
+
+        if (
+            clickedElement instanceof HTMLDivElement &&
+            clickedElement.closest(`.${HTMLClass.Ship}`) != null
+        ) {
+            clickedElement
+                .closest(`.${HTMLClass.Ship}`)
+                ?.classList.toggle(HTMLClass.NormalShip);
+            clickedElement
+                .closest(`.${HTMLClass.Ship}`)
+                ?.classList.toggle(HTMLClass.SelectedShip);
+        }
+    }
+
+    private selectSquaresToPlaceShipOn(
+        e: PointerEvent
+    ): undefined | HTMLDivElement[] {
+        const selectedShip = document.querySelector<HTMLDivElement>(
+            `.${HTMLClass.SelectedShip}`
+        );
+
+        if (selectedShip == null) {
+            return;
+        }
+
+        const hoveredElement = e.target;
+
+        if (
+            hoveredElement instanceof HTMLDivElement &&
+            hoveredElement.classList.contains(HTMLClass.PlayingSquare)
+        ) {
+            const squaresToPlaceShipOn = [hoveredElement];
+            const shipLength = selectedShip.childElementCount;
+
+            for (let i = 0; i < shipLength - 1; i++) {
+                let nextSquare;
+
+                if (selectedShip.classList.contains(HTMLClass.VerticalShip)) {
+                    const currentSquareRow = squaresToPlaceShipOn[
+                        i
+                    ].closest<HTMLDivElement>(`.${HTMLClass.Row}`);
+
+                    currentSquareRow
+                        ?.querySelectorAll<HTMLDivElement>(
+                            `.${HTMLClass.PlayingSquare}`
+                        )
+                        .forEach((square, i) => {
+                            if (square === hoveredElement) {
+                                nextSquare = (
+                                    currentSquareRow?.nextSibling as HTMLDivElement
+                                ).querySelectorAll<HTMLDivElement>(
+                                    `.${HTMLClass.PlayingSquare}`
+                                )[i];
+                            }
+                        });
+                } else {
+                    nextSquare = squaresToPlaceShipOn[i].nextSibling;
+                }
+
+                if (nextSquare != null) {
+                    squaresToPlaceShipOn.push(nextSquare as HTMLDivElement);
+                }
+            }
+
+            for (const square of squaresToPlaceShipOn) {
+                square.style.backgroundColor =
+                    squaresToPlaceShipOn.length === shipLength
+                        ? "var(--gameboard-grid-squares-to-place-ship-on-background)"
+                        : "var(--gameboard-grid-squares-not-to-place-ship-on-background)";
+            }
+
+            return squaresToPlaceShipOn;
+        }
+    }
+
+    private changeShipDirection(e: MouseEvent): void {
+        const clickedElement = e.target;
+
+        if (
+            e.button === 1 &&
+            clickedElement instanceof HTMLDivElement &&
+            clickedElement.closest(`.${HTMLClass.Ship}`) != null
+        ) {
+            const ship = clickedElement.closest<HTMLDivElement>(
+                `.${HTMLClass.Ship}`
+            );
+
+            if (ship != null) {
+                ship.style.visibility = "hidden";
+                const startingSquare = document.elementFromPoint(
+                    ship.getBoundingClientRect().x,
+                    ship.getBoundingClientRect().y
+                );
+                ship.style.visibility = "visible";
+
+                const playingSquares =
+                    document.querySelectorAll<HTMLDivElement>(
+                        `.${HTMLClass.PlayingSquare}`
+                    );
+                const newSquares = [startingSquare];
+                const shipLength = ship.childElementCount;
+
+                // If ship is in vertical position, change it to horizontal
+                if (ship.classList.contains(HTMLClass.VerticalShip)) {
+                    for (let i = 0; i < shipLength - 1; i++) {
+                        newSquares.push(
+                            newSquares[i]?.nextSibling as HTMLDivElement
+                        );
+                    }
+                } else {
+                    playingSquares.forEach((square, i) => {
+                        if (square === startingSquare) {
+                            for (let j = 10; j < shipLength * 10; j += 10) {
+                                newSquares.push(playingSquares[i + j]);
+                            }
+                        }
+                    });
+                }
+
+                if (
+                    shipLength === newSquares.filter((square) => square).length
+                ) {
+                    ship.classList.toggle(HTMLClass.VerticalShip);
+                }
+            }
+        }
     }
 }
