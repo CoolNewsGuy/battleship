@@ -175,6 +175,13 @@ export class GameboardView {
                     selectedShip.style.position = "absolute";
                     selectedShip.style.left = `${squaresToPlaceShipOn[0].offsetLeft}px`;
                     selectedShip.style.top = `${squaresToPlaceShipOn[0].offsetTop}px`;
+
+                    const shipsContainerDiv =
+                        this.gameboardElement.querySelector<HTMLDivElement>(
+                            `.${HTMLClass.ShipsContainer}`
+                        );
+
+                    shipsContainerDiv?.replaceWith(this.createShipsContainer());
                 }
             };
         };
