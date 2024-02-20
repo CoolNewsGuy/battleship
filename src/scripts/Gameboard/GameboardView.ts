@@ -200,12 +200,21 @@ export class GameboardView {
 
     // events
     private toggleShipSelection(e: MouseEvent): void {
+        const alreadySelectedShip =
+            this.gameboardElement.querySelector<HTMLDivElement>(
+                `.${HTMLClass.SelectedShip}`
+            );
         const clickedElement = e.target;
 
         if (
             clickedElement instanceof HTMLDivElement &&
             clickedElement.closest(`.${HTMLClass.Ship}`) != null
         ) {
+            if (alreadySelectedShip != null) {
+                alreadySelectedShip.classList.remove(HTMLClass.SelectedShip);
+                alreadySelectedShip.classList.add(HTMLClass.NormalShip);
+            }
+
             clickedElement
                 .closest(`.${HTMLClass.Ship}`)
                 ?.classList.toggle(HTMLClass.NormalShip);
