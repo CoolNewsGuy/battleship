@@ -198,6 +198,10 @@ export class GameboardView {
             this.changeShipDirection(e);
         };
 
+        gridDiv.onclick = (e) => {
+            this.toggleShipSelection(e);
+        };
+
         return gridDiv;
     }
 
