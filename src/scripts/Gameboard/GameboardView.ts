@@ -189,6 +189,11 @@ export class GameboardView {
                             `.${HTMLClass.ShipsContainer}`
                         );
 
+                    if (this.shipsToPlace.length === 0) {
+                        shipsContainerDiv?.remove();
+                        return;
+                    }
+
                     shipsContainerDiv?.replaceWith(this.createShipsContainer());
                 }
             };
